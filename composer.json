@@ -1,0 +1,13 @@
+{
+    "name": "silvasouza/he",
+    "authors": [
+        {
+            "name": "Rafael da Silva Souza",
+            "email": "silvasouza.rafael@eb.mil.br"
+        }
+    ],
+    "require": {"components/jquery": "^3.5",
+        "twbs/bootstrap": "4.5.0",
+        "datatables/datatables": "^1"
+    }
+}
