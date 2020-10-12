@@ -1,12 +1,13 @@
 <?php
-require_once 'CursoDao.php';
+require_once 'AtividadeDao.php';
 
-class Curso extends CursoDao
+class Atividade extends AtividadeDao
 {
-  protected $table = "curso";
+  protected $table = "atividade";
   private $id;
   private $nome;
-  private $sigla;
+  private $descricao;
+  private $maxHoras;
   private $dataRegistro;
 
   public function getTable()
@@ -39,14 +40,24 @@ class Curso extends CursoDao
     $this->nome = $nome;
   }
 
-  public function getSigla()
+  public function getDescricao()
   {
-    return $this->sigla;
+    return $this->descricao;
   }
 
-  public function setSigla($sigla)
+  public function setDescricao($descricao)
   {
-    $this->sigla = $sigla;
+    $this->descricao = $descricao;
+  }
+
+  public function getMaxHoras()
+  {
+    return $this->maxHoras;
+  }
+
+  public function setMaxHoras($maxHoras)
+  {
+    $this->maxHoras = $maxHoras;
   }
 
   public function getDataRegistro()
@@ -61,11 +72,12 @@ class Curso extends CursoDao
 
   public function insert()
   {
-    $sql = "INSERT INTO $this->table (nome, sigla, data_registro)
-            VALUES (:nome, :sigla, :dataRegistro)";
+    $sql = "INSERT INTO $this->table (nome, descricao, max_horas, data_registro)
+            VALUES (:nome, :descricao, :maxHoras, :dataRegistro)";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('nome', $this->nome);
-    $stmt->bindParam('sigla', $this->sigla);
+    $stmt->bindParam('descricao', $this->descricao);
+    $stmt->bindParam('maxHoras', $this->maxHoras);
     $stmt->bindParam('dataRegistro', $this->dataRegistro);
     return $stmt->execute();
   }
@@ -73,11 +85,13 @@ class Curso extends CursoDao
   public function update()
   {
     $sql = "UPDATE $this->table SET nome = :nome,
-                                    sigla = :sigla
+                                    descricao = :descricao,
+                                    max_horas = :maxHoras
                                     WHERE id =:id";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('nome', $this->nome);
-    $stmt->bindParam('sigla', $this->sigla);
+    $stmt->bindParam('descricao', $this->descricao);
+    $stmt->bindParam('maxHoras', $this->maxHoras);
     $stmt->bindParam('id', $this->id);
     return $stmt->execute();
   }
