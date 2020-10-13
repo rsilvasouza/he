@@ -1,0 +1,31 @@
+body {
+  background: url(../img/bk-login.jpg) no-repeat center top fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+main {
+  margin: 200px 0;
+  padding: 40px;
+}
+
+.center {
+  background-color: #000;
+  margin: 0 auto;
+  width: 500px;
+  padding: 20px;
+  color: white;
+  opacity: 0.8;
+  border-radius: 20px;
+}
+
+input[type = "text"] {
+  opacity: none !important;
+
+}
+
+input[type="button"] {
+  opacity: none !important;
+}
