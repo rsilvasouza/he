@@ -2,6 +2,39 @@
 
 require_once "classes.php";
 $curso = new Curso();
+if (!isset($_SESSION)) session_start();
+
+if (isset($_SESSION["msgSucesso"])) :
+    $msgSucesso = $_SESSION["msgSucesso"];
+    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            $msgSucesso
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                          </div>
+                          ";
+    unset($_SESSION["msgSucesso"]);
+
+elseif (isset($_SESSION["msgErro"])) :
+    $msgErro = $_SESSION["msgErro"];
+    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            $msgErro
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                          </div>";
+    unset($_SESSION["msgErro"]);
+
+elseif (isset($_SESSION["msgInfo"])) :
+    $msgInfo = $_SESSION["msgInfo"];
+    echo "<div class='alert alert-info alert-dismissible fade show' role='alert'>
+                            $msgInfo
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                            </button>
+                          </div>";
+    unset($_SESSION["msgInfo"]);
+endif;
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +43,7 @@ $curso = new Curso();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Controle de Maquinas</title>
+    <title>FAETERJ - Paracambi</title>
     <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="custom/custom.css">
 </head>
@@ -56,7 +89,7 @@ $curso = new Curso();
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="loginController.php">
+                <form method="post" action="alunoController.php">
                     <div class="modal-body text-left">
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -78,14 +111,14 @@ $curso = new Curso();
 
                             <div class="form-group col-md-4">
                                 <label>Senha</label>
-                                <input type="text" name="senha" id="senha" class="form-control" aria-describedby="helpId">
+                                <input type="password" name="senha" id="senha" class="form-control" aria-describedby="helpId">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <label>Curso</label>
-                                <select class="form-control" name="curso" id="">
+                                <select class="form-control" name="curso" id="curso">
                                     <option value="">Selecione</option>
                                     <?php foreach ($curso->findAll() as $key => $value) : ?>
                                         <option value="<?php echo $value->id; ?>"><?php echo $value->sigla . ' - ' . $value->nome; ?></option>
@@ -95,7 +128,7 @@ $curso = new Curso();
 
                             <div class="form-group col-md-4">
                                 <label>Turno</label>
-                                <select class="form-control" name="" id="">
+                                <select class="form-control" name="turno" id="turno">
                                     <option value="">Selecione</option>
                                     <option value="1">Manhã</option>
                                     <option value="2">Noite</option>
@@ -105,10 +138,11 @@ $curso = new Curso();
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="submit" name="cadastrar" class="btn btn-success">Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
             </div>
             </form>
         </div>
     </div>
 </div>
+

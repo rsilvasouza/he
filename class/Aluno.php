@@ -143,32 +143,21 @@ class Aluno extends AlunoDao
                                       email,
                                       senha,
                                       turno,
-                                      status,
-                                      info_cadastro,
-                                      data_registro,
-                                      curso_id,
-                                      administrador_id)
+                                      curso_id)
                                       VALUES (:matricula,
                                               :nome,
                                               :email,
                                               :senha,
                                               :turno,
-                                              :status,
-                                              :infoCadastro,
-                                              :dataRegistro,
-                                              :curso,
-                                              :administrador)";
+                                              :cursoId)";
     $stmt = DB::prepare($sql);    
     $stmt->bindParam('matricula', $this->matricula);
     $stmt->bindParam('nome', $this->nome);
     $stmt->bindParam('email', $this->email);
     $stmt->bindParam('senha', $this->senha);
     $stmt->bindParam('turno', $this->turno);
-    $stmt->bindParam('status', $this->status);
-    $stmt->bindParam('info_cadastro', $this->infoCadastro);
-    $stmt->bindParam('data_registro', $this->dataRegistro);
-    $stmt->bindParam('curso_id', $this->curso);
-    $stmt->bindParam('administrador_id', $this->administrador);
+    $stmt->bindParam('cursoId', $this->curso);
+    
     return $stmt->execute();
   }
 
@@ -192,10 +181,10 @@ class Aluno extends AlunoDao
     $stmt->bindParam('senha', $this->senha);
     $stmt->bindParam('turno', $this->turno);
     $stmt->bindParam('status', $this->status);
-    $stmt->bindParam('info_cadastro', $this->infoCadastro);
-    $stmt->bindParam('data_registro', $this->dataRegistro);
-    $stmt->bindParam('curso_id', $this->curso);
-    $stmt->bindParam('administrador_id', $this->administrador);
+    $stmt->bindParam('infoCadastro', $this->infoCadastro);
+    $stmt->bindParam('dataRegistro', $this->dataRegistro);
+    $stmt->bindParam('cursoId', $this->curso);
+    $stmt->bindParam('administradorId', $this->administrador);
     $stmt->bindParam('id', $this->id);
     return $stmt->execute();
   }

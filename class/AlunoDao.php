@@ -16,6 +16,17 @@ abstract class AlunoDao extends DB
         return $stmt->fetchAll();
     }
 
+    public function findMatricula($matricula)
+    {
+
+        $sql = "select * from $this->table WHERE matricula LIKE ?";
+
+        $params = array("$matricula");
+        $stmt = DB::prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
     public function delete($id)
     {
         $sql = "DELETE FROM $this->table WHERE id = :id";
