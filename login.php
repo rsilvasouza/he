@@ -52,7 +52,7 @@ endif;
     <main>
         <div class="center">
             <h1 class="h3 mb-3 font-weight-normal">Autenticação</h1>
-            <form class="form-signin text-left" method="post" action="usuarioController.php">
+            <form class="form-signin text-left" method="post" action="loginController.php">
                 <div class="form-group">
                     <label for="">E-mail</label>
                     <input type="text" name="email" id="email" class="form-control" placeholder="" aria-describedby="helpId" required>

@@ -18,13 +18,13 @@
            
             # Insert
             
-            if(!$aluno->findMatricula($_POST['matricula'])):
+            if(!$aluno->findMatricula($_POST['matricula']) && !$aluno->findEmail($_POST['email'])):
                 $aluno->insert();
                 $_SESSION['msgSucesso'] = "Registro cadastrado com sucesso. Aguardando aprovação!";
                 header("location: login.php");
                 exit();
             else :
-                $_SESSION['msgErro'] = "Ocorreu um erro durante salvar o registo, por favor tente novamente!";
+                $_SESSION['msgErro'] = "Aluno já cadastrado no sistema!";
                 header("location: login.php");
                 exit();
             endif;

@@ -1,7 +1,7 @@
 <?php
 require_once 'DB.php';
 
-abstract class AlunoDao extends DB
+abstract class AdministradorDao extends DB
 {
     protected $table;
 

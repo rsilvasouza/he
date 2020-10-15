@@ -1,15 +1,16 @@
 <?php
-// ini_set('error_reporting', E_ALL ^ E_NOTICE);
-// ob_start();
-// header('X-Frame-Options: DENY');
+ini_set('error_reporting', E_ALL ^ E_NOTICE);
+ob_start();
+header('X-Frame-Options: DENY');
 
 if (!isset($_SESSION)) session_start();
 
-// if ($_SESSION['status'] != '1') {
-//     header("Location: login.php"); // Chamar um form de login por exemplo.
-// } else {
-//     if (isset($_SESSION['idUsuario'])) $idUsuario = $_SESSION['idUsuario'];
-// }
+if ($_SESSION['status'] != '1') {
+    header("Location: login.php"); // Chamar um form de login por exemplo.
+    exit();
+} else {
+    if (isset($_SESSION['idUsuario'])) $idUsuario = $_SESSION['idUsuario'];
+}
 
 ?>
 <!DOCTYPE html>
@@ -37,7 +38,7 @@ if (!isset($_SESSION)) session_start();
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html">Horas Extracurriculares</a>
+        <a class="navbar-brand" href="index.php">Horas Extracurriculares</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></form>
@@ -48,7 +49,9 @@ if (!isset($_SESSION)) session_start();
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">Editar</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <form action="loginController.php" method="post">
+                        <button class="dropdown-item" name="logout" type="submit">Logout</button>
+                    </form>
                 </div>
             </li>
         </ul>

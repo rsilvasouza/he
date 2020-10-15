@@ -170,7 +170,6 @@ class Aluno extends AlunoDao
                                     turno = :turno,
                                     status = :status,
                                     info_cadastro = :infoCadastro,
-                                    data_registro = :dataRegistro,
                                     curso_id = :curso,
                                     administrador_id = :administrador
                                     WHERE id :id";                                    
@@ -182,10 +181,24 @@ class Aluno extends AlunoDao
     $stmt->bindParam('turno', $this->turno);
     $stmt->bindParam('status', $this->status);
     $stmt->bindParam('infoCadastro', $this->infoCadastro);
-    $stmt->bindParam('dataRegistro', $this->dataRegistro);
     $stmt->bindParam('cursoId', $this->curso);
     $stmt->bindParam('administradorId', $this->administrador);
     $stmt->bindParam('id', $this->id);
     return $stmt->execute();
   }
+
+  public function autenticar(){
+        $sql = "SELECT email, senha FROM $this->table WHERE email = :email AND senha = :senha AND status =:status";
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam('email', $this->email);
+        $stmt->bindParam('senha', $this->senha);
+        $stmt->bindParam('status', $this->status);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (count($resultado) <= 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
