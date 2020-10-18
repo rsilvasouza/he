@@ -24,6 +24,10 @@ if (isset($_POST['logar'])) {
             $_SESSION['status'] = '1';
             header("location: index.php");
             exit();
+        } else if($aluno->verificaStatus($_POST['email'])){
+            $_SESSION['msgInfo'] = "Usuário já cadastrado. <b>Aguardando Aprovação!</b>";
+            header("location: login.php");
+            exit();
         } else {
             $_SESSION['msgErro'] = "Credenciais inválidas!";
             header("location: login.php");

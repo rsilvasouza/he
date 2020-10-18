@@ -201,4 +201,15 @@ class Aluno extends AlunoDao
             return true;
         }
     }
+
+    public function turno($id){
+      if($id == 1){
+        return "Manhã";
+      }elseif($id == 2){
+        return "Noite";
+      }else{
+        return '';
+      }
+
+    }
 }

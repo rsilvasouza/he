@@ -31,7 +31,23 @@
         } catch (Exception $ex) {
             Erro::trataErro($ex);
         }
-    } 
+    } else if(isset($_POST['aprovar'])){
+        try {
+            
+            if($aluno->atualizaStatus($_POST['idAprovar'], 1)){
+                $_SESSION['msgSucesso'] = "Aluno Aprovado com Sucesso!";
+                header("location: alunoCadastrado.php");
+                exit();
+            }else{
+                $_SESSION['msgErro'] = "Erro ao Aprovar registro!";
+                header("location: alunoCadastrado.php");
+                exit();
+            }
+
+        } catch (Exception $ex) {
+            Erro::trataErro($ex);
+        }
+    }
     // else if (isset($_POST['editar'])) {
 
     //     try {

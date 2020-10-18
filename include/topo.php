@@ -61,24 +61,38 @@ if ($_SESSION['status'] != '1') {
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Administração</div>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Cadastros
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="curso.php">Cursos</a>
-                                <a class="nav-link" href="atividade.php">Atividades</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-sidenav-menu-heading"></div>
+                            <!-- <a class="nav-link" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a> -->
+
+                            <div class="sb-sidenav-menu-heading">Administração</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gerenciar" aria-expanded="false" aria-controls="gerenciar">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Gerenciar
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="gerenciar" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="curso.php">Cursos</a>
+                                    <a class="nav-link" href="atividade.php">Tipo de Atividades</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#alunos" aria-expanded="false" aria-controls="alunos">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Aluno
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="alunos" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="alunoCadastrado.php">Aprovar Cadastros</a>
+                                </nav>
+                            </div>
+
+
+                        <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Pages
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -108,8 +122,9 @@ if ($_SESSION['status'] != '1') {
                                     </nav>
                                 </div>
                             </nav>
-                        </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        </div> -->
+                       
+                        <!-- <div class="sb-sidenav-menu-heading">Addons</div>
                         <a class="nav-link" href="charts.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
@@ -117,7 +132,8 @@ if ($_SESSION['status'] != '1') {
                         <a class="nav-link" href="tables.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Tables
-                        </a>
+                        </a> -->
+
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
