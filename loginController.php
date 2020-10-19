@@ -17,12 +17,15 @@ if (isset($_POST['logar'])) {
         $administrador->setSenha($_POST['senha']);
 
         if ($administrador->autenticar()) {
-            $_SESSION['status'] = '1';
+            $_SESSION['status'] = 'logado';
+            $_SESSION['perfil'] = '1';
+            $_SESSION['idUsuario'] = '';
             header("location: index.php");
             exit();
         } else if ($aluno->autenticar()) {
-            $_SESSION['status'] = '1';
-            header("location: index.php");
+            $_SESSION['status'] = 'logado';
+            $_SESSION['perfil'] = '2';
+            header("location: aluno.php");
             exit();
         } else if($aluno->verificaStatus($_POST['email'])){
             $_SESSION['msgInfo'] = "Usuário já cadastrado. <b>Aguardando Aprovação!</b>";

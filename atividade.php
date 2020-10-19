@@ -1,14 +1,19 @@
 <?php
 require_once 'include/topo.php';
+require_once 'include/verificaAcesso.php';
 require_once 'classes.php';
 
 $atividade = new Atividade();
 
 ?>
 <div class="container-fluid">
-    <h1>Atividades</h1>
-    <div class="text-right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastrar">Cadastrar</button>
+<div class="form-row">
+        <div class="form-group col-md-10">
+            <h1>Atividades</h1>
+        </div>
+        <div class="form-group col-md-2">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastrar">Cadastrar</button>
+        </div>
     </div>
     <table id="listar" class="display" style="width:100%">
         <thead>

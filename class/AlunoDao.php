@@ -73,6 +73,10 @@ abstract class AlunoDao extends DB
     return $stmt->execute();
   }
 
+  public function horasCadastradas(){
+      
+  }
+
     public function delete($id)
     {
         $sql = "DELETE FROM $this->table WHERE id = :id";

@@ -1,5 +1,6 @@
 <?php
 require_once 'include/topo.php';
+require_once 'include/verificaAcesso.php';
 require_once 'classes.php';
 
 $aluno = new Aluno();
