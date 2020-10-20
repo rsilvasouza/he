@@ -23,7 +23,11 @@ if (isset($_POST['logar'])) {
             header("location: index.php");
             exit();
         } else if ($aluno->autenticar()) {
+            
+            $dados = $aluno->findEmail($_POST['email']);
             $_SESSION['status'] = 'logado';
+            $_SESSION['idAluno'] = $dados[0]->id;
+            $_SESSION['nome'] = $dados[0]->nome;
             $_SESSION['perfil'] = '2';
             header("location: aluno.php");
             exit();

@@ -188,7 +188,7 @@ class Aluno extends AlunoDao
   }
 
   public function autenticar(){
-        $sql = "SELECT email, senha FROM $this->table WHERE email = :email AND senha = :senha AND status =:status";
+        $sql = "SELECT id, email, senha FROM $this->table WHERE email = :email AND senha = :senha AND status =:status";
         $stmt = DB::prepare($sql);
         $stmt->bindParam('email', $this->email);
         $stmt->bindParam('senha', $this->senha);

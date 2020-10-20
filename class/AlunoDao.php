@@ -73,8 +73,13 @@ abstract class AlunoDao extends DB
     return $stmt->execute();
   }
 
-  public function horasCadastradas(){
-      
+  public function horasCadastradas($id){
+    $sql = "SELECT count(*) AS total FROM $this->table a INNER JOIN aluno_atividade atv ON
+            atv.aluno_id = a.id WHERE a.id = :id AND atv.status IS NULL";
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam('id', $id);
+    $stmt->execute();
+    return $stmt->fetchAll();
   }
 
     public function delete($id)
