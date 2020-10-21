@@ -3,6 +3,7 @@ require_once 'include/topo.php';
 require_once 'classes.php';
 
 $alunoAtividade = new AlunoAtividade();
+$atividade = new Atividade();
 
 ?>
 <div class="container-fluid">
@@ -110,24 +111,43 @@ $alunoAtividade = new AlunoAtividade();
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Cadastro de Curso</h5>
+                <h5 class="modal-title">Cadastro de Atividades</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="cursoController.php">
+            <form method="post" action="atividadeAlunoController.php">
                 <div class="modal-body text-left">
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label>Sigla</label>
-                            <input type="text" name="sigla" id="sigla" class="form-control" aria-describedby="helpId">
+                            <label>Atividade</label>
+                            <select class="form-control" name="atividade" id="atividade">
+                                <option value="">Selecione</option>
+                                <?php foreach ($atividade->findAll() as $key => $value) : ?>
+                                    <option value="<?php echo $value->id; ?>"><?php echo $value->nome; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
 
                         <div class="form-group col-md-8">
-                            <label>Nome do Curso</label>
-                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId">
+                            <label>Descrição</label>
+                            <input type="text" name="descricao" id="descricao" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                        <label>Horas</label>
+                            <input type="time" name="horas" id="horas" class="form-control" aria-describedby="helpId">
+                        </div>
+
+                        <div class="form-group col-md-10">
+                            <label>Arquivo</label>
+                            <input type="file" name="arquivo" id="arquivo" class="form-control" aria-describedby="helpId">
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" name="cadastrar" class="btn btn-success">Salvar</button>

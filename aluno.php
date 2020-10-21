@@ -14,15 +14,6 @@ foreach ($alunos as $key => $value) {
 ?>
 
 <div class="container-fluid">
-    <div class="form-row">
-        <div class="form-group col-md-10">
-            <h1>Cursos</h1>
-        </div>
-        <div class="form-group col-md-2">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastrar">Cadastrar</button>
-        </div>
-    </div>
-
     <div class="row">
         <div class="col-xxl-3 col-lg-6">
             <div class="card bg-info text-white mb-4">
