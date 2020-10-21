@@ -11,7 +11,6 @@
            $atividade->setNome($_POST['nome']);
            $atividade->setDescricao($_POST['descricao']);
            $atividade->setMaxHoras($_POST['maxHoras']);
-           $atividade->setDataRegistro(date('Y-m-d H:i:s'));
             # Insert
             if ($atividade->insert()) :
                 $_SESSION['msgSucesso'] = "Atividade cadastrada com sucesso!";

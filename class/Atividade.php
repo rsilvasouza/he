@@ -72,13 +72,12 @@ class Atividade extends AtividadeDao
 
   public function insert()
   {
-    $sql = "INSERT INTO $this->table (nome, descricao, max_horas, data_registro)
-            VALUES (:nome, :descricao, :maxHoras, :dataRegistro)";
+    $sql = "INSERT INTO $this->table (nome, descricao, max_horas)
+            VALUES (:nome, :descricao, :maxHoras)";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('nome', $this->nome);
     $stmt->bindParam('descricao', $this->descricao);
     $stmt->bindParam('maxHoras', $this->maxHoras);
-    $stmt->bindParam('dataRegistro', $this->dataRegistro);
     return $stmt->execute();
   }
 

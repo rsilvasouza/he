@@ -10,7 +10,6 @@
         try {
            $curso->setNome($_POST['nome']);
            $curso->setSigla($_POST['sigla']);
-           $curso->setDataRegistro(date('Y-m-d H:i:s'));
             # Insert
             if ($curso->insert()) :
                 $_SESSION['msgSucesso'] = "Curso cadastrado com sucesso!";

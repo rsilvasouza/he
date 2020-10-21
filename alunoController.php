@@ -13,9 +13,7 @@
             $aluno->setEmail($_POST['email']);
             $aluno->setSenha($_POST['senha']);            
             $aluno->setTurno($_POST['turno']);
-            $aluno->setCurso($_POST['curso']);
-           // $aluno->setDataRegistro(date('Y-m-d H:i:s'));
-           
+            $aluno->setCurso($_POST['curso']);           
             # Insert
             
             if(!$aluno->findMatricula($_POST['matricula']) && !$aluno->findEmail($_POST['email'])):

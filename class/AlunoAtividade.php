@@ -116,12 +116,11 @@ class AlunoAtividade extends AlunoAtividadeDao
 
   public function insert()
   {
-    $sql = "INSERT INTO $this->table (nome, sigla, data_registro)
-            VALUES (:nome, :sigla, :dataRegistro)";
+    $sql = "INSERT INTO $this->table (nome, sigla)
+            VALUES (:nome, :sigla)";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('nome', $this->nome);
     $stmt->bindParam('sigla', $this->sigla);
-    $stmt->bindParam('dataRegistro', $this->dataRegistro);
     return $stmt->execute();
   }
 
