@@ -118,9 +118,17 @@ $atividade = new Atividade();
             </div>
             <form method="post" action="atividadeAlunoController.php">
                 <div class="modal-body text-left">
+
                     <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Atividade</label>
+                        <div class="form-group col-md-12">
+                            <label>Nome da Atividade</label>
+                            <input type="text" name="descricao" id="descricao" class="form-control" aria-describedby="helpId">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Tipo de Atividade</label>
                             <select class="form-control" name="atividade" id="atividade">
                                 <option value="">Selecione</option>
                                 <?php foreach ($atividade->findAll() as $key => $value) : ?>
@@ -128,22 +136,24 @@ $atividade = new Atividade();
                                 <?php endforeach; ?>
                             </select>
                         </div>
+                    </div>
 
-                        <div class="form-group col-md-8">
-                            <label>Descrição</label>
-                            <input type="text" name="descricao" id="descricao" class="form-control" aria-describedby="helpId">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Horas</label>
+                            <input type="time" name="horas" id="horas" class="form-control" aria-describedby="helpId">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Data de Realização</label>
+                            <input type="date" name="data" id="data" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-2">
-                        <label>Horas</label>
-                            <input type="time" name="horas" id="horas" class="form-control" aria-describedby="helpId">
-                        </div>
-
                         <div class="form-group col-md-10">
-                            <label>Arquivo</label>
-                            <input type="file" name="arquivo" id="arquivo" class="form-control" aria-describedby="helpId">
+                            <label>Anexar Arquivo</label>
+                            <input type="file" name="arquivo" id="arquivo" class="form-control-file" aria-describedby="helpId">
                         </div>
                     </div>
 

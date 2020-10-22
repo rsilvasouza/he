@@ -33,7 +33,6 @@ CREATE TABLE IF NOT EXISTS `she`.`administrador` (
   `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -47,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `she`.`curso` (
   `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -76,7 +74,6 @@ CREATE TABLE IF NOT EXISTS `she`.`aluno` (
     FOREIGN KEY (`administrador_id`)
     REFERENCES `she`.`administrador` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -91,7 +88,6 @@ CREATE TABLE IF NOT EXISTS `she`.`atividade` (
   `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -104,10 +100,12 @@ CREATE TABLE IF NOT EXISTS `she`.`aluno_atividade` (
   `horas_registradas` TIME NOT NULL,
   `status` TINYINT NULL DEFAULT NULL,
   `arquivo` VARCHAR(255) NULL DEFAULT NULL,
+  `data_atividade` DATETIME NOT NULL,
   `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `aluno_id` INT NOT NULL,
   `atividade_id` INT NOT NULL,
   `administrador_id` INT NULL DEFAULT NULL,
+
   PRIMARY KEY (`id`, `aluno_id`, `atividade_id`),
   INDEX `atividade_id` (`atividade_id` ASC) VISIBLE,
   INDEX `aluno_id` (`aluno_id` ASC) VISIBLE,
@@ -118,7 +116,6 @@ CREATE TABLE IF NOT EXISTS `she`.`aluno_atividade` (
     FOREIGN KEY (`aluno_id`)
     REFERENCES `she`.`aluno` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -127,5 +124,6 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-INSERT INTO curso (nome, sigla, data_registro) VALUES ('Sistema da Informação', 'SI', '2020-01-01 00:00:00');
-INSERT INTO curso (nome, sigla, data_registro) VALUES ('Gestão Ambiental', 'GA', '2020-01-01 00:00:00');
+INSERT INTO curso (nome, sigla, data_registro) VALUES ('Sistema da Informação', 'SI', DEFAULT);
+INSERT INTO curso (nome, sigla, data_registro) VALUES ('Gestão Ambiental', 'GA', DEFAULT);
+INSERT INTO administrador (matricula, nome, email, senha, data_registro) VALUES ('123456789', 'Administrador', 'administrador@admin.com','e10adc3949ba59abbe56e057f20f883e', DEFAULT); 
