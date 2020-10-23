@@ -20,7 +20,7 @@ $atividade = new Atividade();
             <tr>
                 <th>#</th>
                 <th>Nome</th>
-                <th>Descrição</th>
+                <th>Modo de Comprovação</th>
                 <th>Horas Máximas</th>
                 <th></th>
                 <th></th>
@@ -30,10 +30,10 @@ $atividade = new Atividade();
             <tr>
                 <td><?php echo $value->id; ?></td>
                 <td><?php echo $value->nome; ?></td>
-                <td><?php echo $value->descricao; ?></td>
+                <td><?php echo $value->modo_comprovacao; ?></td>
                 <td><?php echo $value->max_horas; ?></td>
                 <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->nome . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->max_horas . '\'' ?>)">Editar</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->nome . '\',' . '\'' . $value->modo_comprovacao . '\',' . '\'' . $value->max_horas . '\'' ?>)">Editar</button>
                 </td>
                 <td>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)">Excluir</button>
@@ -96,7 +96,7 @@ $atividade = new Atividade();
 
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label>Descrição</label>
+                            <label>Modo de Comprovação</label>
                             <input type="text" name="descricao" id="descricao" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
@@ -136,7 +136,7 @@ $atividade = new Atividade();
 
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label>Descrição</label>
+                            <label>Modo de Comprovação</label>
                             <input type="text" name="descricao" id="descricao" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
@@ -159,12 +159,12 @@ $atividade = new Atividade();
         });
     });
 
-    function preencheDados(tipo, id, nome, descricao, maxHoras) {
+    function preencheDados(tipo, id, nome, modo_comprovacao, maxHoras) {
 
         if(tipo == 'editar'){
             $('#id').val(id);
             $('#nome').val(nome);
-            $('#descricao').val(descricao);
+            $('#descricao').val(modo_comprovacao);
             $('#maxHoras').val(maxHoras);
             
         }else if(tipo == 'excluir'){
