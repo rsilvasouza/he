@@ -6,7 +6,7 @@ class Atividade extends AtividadeDao
   protected $table = "atividade";
   private $id;
   private $nome;
-  private $descricao;
+  private $modo_comprovacao;
   private $maxHoras;
   private $dataRegistro;
 
@@ -40,14 +40,14 @@ class Atividade extends AtividadeDao
     $this->nome = $nome;
   }
 
-  public function getDescricao()
+  public function getModo_comprovacao()
   {
-    return $this->descricao;
+    return $this->modo_comprovacao;
   }
 
-  public function setDescricao($descricao)
+  public function setModo_comprovacao($modo_comprovacao)
   {
-    $this->descricao = $descricao;
+    $this->modo_comprovacao = $modo_comprovacao;
   }
 
   public function getMaxHoras()
@@ -72,11 +72,11 @@ class Atividade extends AtividadeDao
 
   public function insert()
   {
-    $sql = "INSERT INTO $this->table (nome, descricao, max_horas, data_registro)
-            VALUES (:nome, :descricao, :maxHoras, :dataRegistro)";
+    $sql = "INSERT INTO $this->table (nome, modo_comprovacao, max_horas, data_registro)
+            VALUES (:nome, :modo_comprovacao, :maxHoras, :dataRegistro)";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('nome', $this->nome);
-    $stmt->bindParam('descricao', $this->descricao);
+    $stmt->bindParam('modo_comprovacao', $this->modo_comprovacao);
     $stmt->bindParam('maxHoras', $this->maxHoras);
     $stmt->bindParam('dataRegistro', $this->dataRegistro);
     return $stmt->execute();
@@ -85,12 +85,12 @@ class Atividade extends AtividadeDao
   public function update()
   {
     $sql = "UPDATE $this->table SET nome = :nome,
-                                    descricao = :descricao,
+                                    modo_comprovacao = :modo_comprovacao,
                                     max_horas = :maxHoras
                                     WHERE id =:id";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('nome', $this->nome);
-    $stmt->bindParam('descricao', $this->descricao);
+    $stmt->bindParam('modo_comprovacao', $this->modo_comprovacao);
     $stmt->bindParam('maxHoras', $this->maxHoras);
     $stmt->bindParam('id', $this->id);
     return $stmt->execute();

@@ -9,7 +9,7 @@
 
         try {
            $atividade->setNome($_POST['nome']);
-           $atividade->setDescricao($_POST['descricao']);
+           $atividade->setModo_comprovacao($_POST['modo_comprovacao']);
            $atividade->setMaxHoras($_POST['maxHoras']);
            $atividade->setDataRegistro(date('Y-m-d H:i:s'));
             # Insert
@@ -30,7 +30,7 @@
         try {
             $atividade->setId($_POST['id']);
             $atividade->setNome($_POST['nome']);
-            $atividade->setDescricao($_POST['descricao']);
+            $atividade->setModo_comprovacao($_POST['modo_comprovacao']);
             $atividade->setMaxHoras($_POST['maxHoras']);
 
             if ($atividade->update()) :
