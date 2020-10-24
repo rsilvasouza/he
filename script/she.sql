@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS `she`.`aluno` (
   `curso_id` INT NOT NULL,
   `administrador_id` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `curso_id` (`curso_id` ASC) VISIBLE,
-  INDEX `administrador_id` (`administrador_id` ASC) VISIBLE,
+  -- INDEX `curso_id` (`curso_id` ASC) VISIBLE,
+  -- INDEX `administrador_id` (`administrador_id` ASC) VISIBLE,
   CONSTRAINT `aluno_ibfk_1`
     FOREIGN KEY (`curso_id`)
     REFERENCES `she`.`curso` (`id`),
@@ -82,7 +82,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `she`.`atividade` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(50) NOT NULL,
+  `nome` VARCHAR(255) NOT NULL,
   `modo_comprovacao` VARCHAR(255) NULL DEFAULT NULL,
   `max_horas` INT NOT NULL,
   `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -107,8 +107,8 @@ CREATE TABLE IF NOT EXISTS `she`.`aluno_atividade` (
   `administrador_id` INT NULL DEFAULT NULL,
 
   PRIMARY KEY (`id`, `aluno_id`, `atividade_id`),
-  INDEX `atividade_id` (`atividade_id` ASC) VISIBLE,
-  INDEX `aluno_id` (`aluno_id` ASC) VISIBLE,
+  -- INDEX `atividade_id` (`atividade_id` ASC) VISIBLE,
+  -- INDEX `aluno_id` (`aluno_id` ASC) VISIBLE,
   CONSTRAINT `aluno_atividade_ibfk_1`
     FOREIGN KEY (`atividade_id`)
     REFERENCES `she`.`atividade` (`id`),
@@ -123,31 +123,33 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-
+-- Dados da Tabela Curso
 INSERT INTO curso (nome, sigla, data_registro) VALUES ('Sistema da Informação', 'SI', DEFAULT);
 INSERT INTO curso (nome, sigla, data_registro) VALUES ('Gestão Ambiental', 'GA', DEFAULT);
+
+-- Dados da Tabela Administrador
 INSERT INTO administrador (matricula, nome, email, senha, data_registro) VALUES ('123456789', 'Administrador', 'administrador@admin.com','e10adc3949ba59abbe56e057f20f883e', DEFAULT); 
 
-INSERT INTO atividade VALUES
-(DEFAULT,"Disciplinas cursadas além da grade regular do curso", "Secretaria Geral", 50, DEFAULT),
-(DEFAULT,"Participação de curso ministrado pela FAETERJ", "Coord. de Extensão", 40, DEFAULT) , 
-(DEFAULT,"Cursos externos correlatos ao curso do aluno", "Certificado do curso", 40, DEFAULT),
-(DEFAULT,"Participação como ouvinte em palestras correlatas ao curso do aluno", "Certificado da palestra / Ata de presença (quando realizada pela IES)", 10, DEFAULT),
-(DEFAULT,"Iniciação tecnológica e/ou científica", "Certificado", 40, DEFAULT),
-(DEFAULT,"Trabalhos publicados em periódicos científicos indexados", "Cópia do trabalho", 20, DEFAULT),
-(DEFAULT,"Trabalhos publicados em periódicos científicos não indexados", "Cópia do trabalho", 10, DEFAULT) ,
-(DEFAULT,"Trabalhos apresentados em eventos científicos", "Certificado do evento e cópia do resumo", 10, DEFAULT), 
-(DEFAULT,"Participação na publicação de capítulos de livros/revistas científicas", "Copia do trabalho", 10, DEFAULT),
-(DEFAULT,"Participação em pesquisa ou projetos institucionais na IES", "Coord. de Pesquisa", 20, DEFAULT),
-(DEFAULT,"Visita técnica", "Certificado / Ata de presença (quando realizada pela IES)", 20, DEFAULT),
-(DEFAULT,"Participação como ouvinte em banca de TCC", "Ata de presença", 10, DEFAULT),
-(DEFAULT,"Participação em projeto voltado para a comunidade e/ou de interesse da Instituição.", "Certificado / Comprovante ", 40, DEFAULT),
-(DEFAULT,"Eventos acadêmicos promovidos por instituições/ órgãos oficiais relacionados à formação profissional do aluno", "Certificado", 15, DEFAULT) ,
-(DEFAULT,"Representação estudantil em conselho, colegiado e diretório acadêmico.", "Direção ou Coord. de Curso", 15, DEFAULT),
-(DEFAULT,"Atividades culturais: teatro, cinema, museu,  etc.", "Comprovante da Atividade", 10, DEFAULT),
-(DEFAULT,"Ministrar curso na FAETERJ", "Certificado pela Coord. de Extensão", 30, DEFAULT),
-(DEFAULT,"Monitoria (eventos na FAETERJ, externa, de disciplina concluída, de projeto)", "Declaração", 60, DEFAULT),
-(DEFAULT,"Apresentação de TCC", "Cópia da ata", 5, DEFAULT),
-(DEFAULT,"Participação em Empresa Junior", "Registro de posse em ata", 30, DEFAULT),
-(DEFAULT,"Participação em simulado promovido pela IES", "Ata de presença", 20, DEFAULT),
-(DEFAULT,"Participação em avaliação institucional promovida pela IES", "Ata de presença", 20, DEFAULT);
+-- Dados da Tabela Atividade
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Disciplinas cursadas além da grade regular do curso", "Secretaria Geral", 50, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação de curso ministrado pela FAETERJ", "Coord. de Extensão", 40, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Cursos externos correlatos ao curso do aluno", "Certificado do curso", 40, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação como ouvinte em palestras correlatas ao curso do aluno", "Certificado da palestra / Ata de presença (quando realizada pela IES)", 10, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Iniciação tecnológica e/ou científica", "Certificado", 40, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Trabalhos publicados em periódicos científicos indexados", "Cópia do trabalho", 20, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Trabalhos publicados em periódicos científicos não indexados", "Cópia do trabalho", 10, DEFAULT) ;
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Trabalhos apresentados em eventos científicos", "Certificado do evento e cópia do resumo", 10, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação na publicação de capítulos de livros/revistas científicas", "Copia do trabalho", 10, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação em pesquisa ou projetos institucionais na IES", "Coord. de Pesquisa", 20, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Visita técnica", "Certificado / Ata de presença (quando realizada pela IES)", 20, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação como ouvinte em banca de TCC", "Ata de presença", 10, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação em projeto voltado para a comunidade e/ou de interesse da Instituição.", "Certificado / Comprovante ", 40, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Eventos acadêmicos promovidos por instituições/ órgãos oficiais relacionados à formação profissional do aluno", "Certificado", 15, DEFAULT) ;
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Representação estudantil em conselho, colegiado e diretório acadêmico.", "Direção ou Coord. de Curso", 15, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Atividades culturais: teatro, cinema, museu,  etc.", "Comprovante da Atividade", 10, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Ministrar curso na FAETERJ", "Certificado pela Coord. de Extensão", 30, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Monitoria (eventos na FAETERJ, externa, de disciplina concluída, de projeto)", "Declaração", 60, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Apresentação de TCC", "Cópia da ata", 5, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação em Empresa Junior", "Registro de posse em ata", 30, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação em simulado promovido pela IES", "Ata de presença", 20, DEFAULT);
+INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação em avaliação institucional promovida pela IES", "Ata de presença", 20, DEFAULT);
