@@ -34,10 +34,10 @@ $atividade = new Atividade();
                 <td><?php echo $value->descricao; ?></td>
                 <td><?php echo $value->horas_registradas; ?></td>
                 <td><?php echo $value->arquivo; ?></td>
-                <td><?php echo $value->data_registro; ?></td>
+                <td><?php echo date("d/m/Y", strtotime($value->data_registro)); ?></td>
                 <td><?php echo $alunoAtividade->situacao($value->status); ?></td>
                 <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->sigla . '\',' . '\'' . $value->nome . '\'' ?>)">Editar</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar')">Editar</button>
                 </td>
                 <td>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)">Excluir</button>
@@ -116,7 +116,7 @@ $atividade = new Atividade();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="atividadeAlunoController.php">
+            <form enctype="multipart/form-data" method="post" action="atividadeAlunoController.php">
                 <div class="modal-body text-left">
 
                     <div class="form-row">

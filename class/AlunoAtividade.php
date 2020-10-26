@@ -7,6 +7,7 @@ class AlunoAtividade extends AlunoAtividadeDao
   private $id;
   private $descricao;
   private $horas;
+  private $dataAtividade;
   private $status;
   private $arquivo;
   private $dataRegistro;
@@ -52,6 +53,16 @@ class AlunoAtividade extends AlunoAtividadeDao
   public function setHoras($horas)
   {
     $this->horas = $horas;
+  }
+
+  public function getDataAtividade()
+  {
+    return $this->dataAtividade;
+  }
+
+  public function setDataAtividade($dataAtividade)
+  {
+    $this->dataAtividade = $dataAtividade;
   }
 
   public function getStatus()
@@ -116,11 +127,20 @@ class AlunoAtividade extends AlunoAtividadeDao
 
   public function insert()
   {
-    $sql = "INSERT INTO $this->table (nome, sigla)
-            VALUES (:nome, :sigla)";
+    $sql = "INSERT INTO $this->table (descricao, atividade_id, horas_registradas, data_atividade, arquivo, aluno_id)
+            VALUES (:descricao,
+                    :atividadeId,
+                    :horasRegistradas,
+                    :dataAtividade,
+                    :arquivo,
+                    :alunoId)";
     $stmt = DB::prepare($sql);
-    $stmt->bindParam('nome', $this->nome);
-    $stmt->bindParam('sigla', $this->sigla);
+    $stmt->bindParam('descricao', $this->descricao);
+    $stmt->bindParam('atividadeId', $this->atividadeId);
+    $stmt->bindParam('horasRegistradas', $this->horas);
+    $stmt->bindParam('dataAtividade', $this->dataAtividade);
+    $stmt->bindParam('arquivo', $this->arquivo);
+    $stmt->bindParam('alunoId', $this->alunoId);
     return $stmt->execute();
   }
 
@@ -136,13 +156,19 @@ class AlunoAtividade extends AlunoAtividadeDao
     return $stmt->execute();
   }
 
-  public function situacao($status) {
-    if ($status == 0) {
-      return "Rejeitada";
-    } elseif ($status == 1) {
-      return "Aprovada";
-    } else {
-      return "Análise";
+  public function situacao($status)
+  {
+
+    switch ($status) {
+      case 0:
+        return "Rejeitada";
+        break;
+      case 1:
+        return "Aprovada";
+        break;
+      case -1:
+        return "Cadastrada";
+        break;
     }
   }
 }

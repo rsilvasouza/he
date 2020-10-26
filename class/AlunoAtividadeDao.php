@@ -20,7 +20,7 @@ abstract class AlunoAtividadeDao extends DB
     {
         $sql = "SELECT at.nome, a.descricao, a.horas_registradas, a.arquivo, a.data_registro, a.status, a.id
                 FROM $this->table a INNER JOIN atividade at
-                ON a.atividade_id = a.id where a.aluno_id = :id";
+                ON a.atividade_id = at.id where a.aluno_id = :id";
         $stmt = DB::prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();

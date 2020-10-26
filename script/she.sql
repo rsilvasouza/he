@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `she`.`aluno_atividade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(300) NOT NULL,
   `horas_registradas` TIME NOT NULL,
-  `status` TINYINT NULL DEFAULT NULL,
+  `status` TINYINT NULL DEFAULT -1,
   `arquivo` VARCHAR(255) NULL DEFAULT NULL,
   `data_atividade` DATETIME NOT NULL,
   `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

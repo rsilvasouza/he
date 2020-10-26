@@ -8,18 +8,55 @@
     if (isset($_POST['cadastrar'])) {
 
         try {
-           $atividadeAluno->setNome($_POST['nome']);
-           $atividadeAluno->setSigla($_POST['sigla']);
-            # Insert
-            if ($atividadeAluno->insert()) :
-                $_SESSION['msgSucesso'] = "Curso cadastrado com sucesso!";
-                header("location: curso.php");
-                exit();
-            else :
-                $_SESSION['msgErro'] = "Ocorreu um erro durante salvar o registo, por favor tente novamente";
-                header("location: curso.php");
-                exit();
-            endif;
+
+            $alunoAtividade->setDescricao($_POST['descricao']);
+            $alunoAtividade->setAtividadeId($_POST['atividade']);
+            $alunoAtividade->setHoras($_POST['horas']);
+            $alunoAtividade->setDataAtividade($_POST['data']);
+            $alunoAtividade->setAlunoId($_SESSION['idAluno']);
+
+            if (!empty($_FILES['arquivo']['name'])) {
+                $formatosPermitidos = array("png", "jpep", "jpg", "gif");
+                $extensao = pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION);
+
+                if (in_array($extensao, $formatosPermitidos)) {
+                    $pasta = "arquivos/";
+                    $temporario = $_FILES['arquivo']['tmp_name'];
+                    $novoNome = uniqid() . ".$extensao";
+                    $alunoAtividade->setArquivo($novoNome);
+
+                    if (move_uploaded_file($temporario, $pasta . $novoNome)) {
+                        if ($alunoAtividade->insert()) :
+                            $_SESSION['msgSucesso'] = "Atividade cadastrada com sucesso!";
+                            header("location: atividadeAluno.php");
+                            exit();
+                        else :
+                            $_SESSION['msgErro'] = "Ocorreu um erro durante salvar o registo, por favor tente novamente";
+                            header("location: atividadeAluno.php");
+                            exit();
+                        endif;
+                    } else {
+                        $_SESSION['msgInfo'] = "Ops! Erro ao salvar arquivo!";
+                        header("location: atividadeAluno.php");
+                        exit();
+                    }
+
+                    $_SESSION['msgErro'] = "O <b>formato do arquivo</b> informado não é válido";
+                    header("location: atividadeAluno.php");
+                    exit();
+                }
+            } else {
+                $alunoAtividade->setArquivo('');
+                if ($alunoAtividade->insert()) :
+                    $_SESSION['msgSucesso'] = "Atividade cadastrada com sucesso!";
+                    header("location: atividadeAluno.php");
+                    exit();
+                else :
+                    $_SESSION['msgErro'] = "Ocorreu um erro durante salvar o registo, por favor tente novamente";
+                    header("location: atividadeAluno.php");
+                    exit();
+                endif;
+            }
         } catch (Exception $ex) {
             Erro::trataErro($ex);
         }
@@ -61,7 +98,7 @@
     //         Erro::trataErro($ex);
     //     }
     // } 
-    
+
     else {
         $_SESSION['msgInfo'] = "Ops, algo de errado aconteceu!";
         header("location: index.php");
