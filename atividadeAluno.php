@@ -16,30 +16,35 @@ $atividade = new Atividade();
         </div>
     </div>
     <table id="listar" class="display" style="width:100%">
-        <thead>
+        <thead class="text-center">
             <tr>
-                <th>Atividade</th>
-                <th>Descricao</th>
+                <th>Nome da Atividade</th>    
+                <th>Tipo de Atividade</th>    
                 <th>Horas</th>
-                <th>Arquivo</th>
                 <th>Data do Cadastro</th>
                 <th>Situação</th>
+                <th>Arquivo</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <?php foreach ($alunoAtividade->findAtividadesCadastradas($_SESSION['idAluno']) as $key => $value) : ?>
             <tr>
-                <td><?php echo $value->nome; ?></td>
-                <td><?php echo $value->descricao; ?></td>
-                <td><?php echo $value->horas_registradas; ?></td>
-                <td><?php echo $value->arquivo; ?></td>
-                <td><?php echo date("d/m/Y", strtotime($value->data_registro)); ?></td>
-                <td><?php echo $alunoAtividade->situacao($value->status); ?></td>
-                <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar')">Editar</button>
+            <td><?php echo $value->descricao; ?></td>    
+            <td><?php echo $value->nome; ?></td>
+                <td class="text-center"><?php echo $value->horas_registradas; ?></td>
+                
+                <td class="text-center"><?php echo date("d/m/Y", strtotime($value->data_atividade));?></td>
+                <td class="text-center"><?php echo $alunoAtividade->situacao($value->status); ?></td>
+                <td class="text-center">
+                    <a class="btn btn-info" href="arquivos/<?php echo $value->arquivo; ?>" download="<?php echo $value->descricao; ?>">
+                        <i class="fas fa-cloud-download-alt"></i> Download
+                    </a>
                 </td>
-                <td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\''. $value->id . '\',' . '\''. $value->descricao . '\',' . '\''. $value->nome . '\',' . '\''. $value->horas_registradas . '\',' . '\''. $value->data_atividade . '\'' ?>)">Editar</button>
+                </td>
+                <td class="text-center">
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)">Excluir</button>
                 </td>
             </tr>
@@ -82,20 +87,49 @@ $atividade = new Atividade();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="cursoController.php">
+
+            <form enctype="multipart/form-data" method="post" action="atividadeAlunoController.php">
                 <div class="modal-body text-left">
                     <input type="hidden" value="<?php echo $value->id; ?>" name="id" id="id">
                     <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Sigla</label>
-                            <input type="text" name="sigla" id="sigla" class="form-control" aria-describedby="helpId">
-                        </div>
-
-                        <div class="form-group col-md-8">
-                            <label>Nome do Curso</label>
-                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId">
+                        <div class="form-group col-md-12">
+                            <label>Nome da Atividade</label>
+                            <input type="text" name="descricao" id="descricao" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Tipo de Atividade</label>
+                            <select class="form-control" name="atividade" id="atividade">
+                                <option value="">Selecione</option>
+                                <?php foreach ($atividade->findAll() as $key => $value) : ?>
+                                    <option value="<?php echo $value->id; ?>" <?php ($value->id == VALOR_DO_BANCO) ? 'selected' : '';?>><?php echo $value->nome; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Horas</label>
+                            <input type="time" name="horas" id="horas" class="form-control" aria-describedby="helpId">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Data de Realização</label>
+                            <input type="date" name="datas" id="datas" class="form-control" aria-describedby="helpId">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+                            <label>Anexar Arquivo</label>
+                            <input type="file" name="arquivo" id="arquivo" class="form-control-file" aria-describedby="helpId">
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" name="editar" class="btn btn-success">Editar</button>
@@ -177,12 +211,13 @@ $atividade = new Atividade();
         });
     });
 
-    function preencheDados(tipo, id, sigla, nome) {
+    function preencheDados(tipo, id, descricao, atividade, hora, data) {
         if (tipo == 'editar') {
             $('#id').val(id);
-            $('#sigla').val(sigla);
-            $('#nome').val(nome);
-
+            $('#descricao').val(descricao);
+            $('#atividade').val(atividade);
+            $('#horas').val(hora);
+            $('#datas').val(data);
         } else if (tipo == 'excluir') {
             $('#idExcluir').val(id);
         }

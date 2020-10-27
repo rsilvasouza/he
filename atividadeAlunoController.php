@@ -40,8 +40,8 @@
                         header("location: atividadeAluno.php");
                         exit();
                     }
-
-                    $_SESSION['msgErro'] = "O <b>formato do arquivo</b> informado não é válido";
+                } else {
+                    $_SESSION['msgInfo'] = "O formato do arquivo informado <b>não é válido</b>";
                     header("location: atividadeAluno.php");
                     exit();
                 }
