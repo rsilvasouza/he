@@ -2,13 +2,17 @@
 require_once "include/topo.php";
 require_once 'classes.php';
 
-$aluno = new Aluno();
+$alunoAtividade = new AlunoAtividade();
 
-$alunos = $aluno->horasCadastradas($_SESSION['idAluno']);
-foreach ($alunos as $key => $value) {
-    $horasCadastradas = $value->total;
+$horasCadastradas = $alunoAtividade->horasCadastradas($_SESSION['idAluno']);
+foreach ($horasCadastradas as $key => $value) {
+    $horasCadastrada = $value->total;
 }
 
+$horasAprovadas = $alunoAtividade->horasAprovadas($_SESSION['idAluno']);
+foreach ($horasAprovadas as $key => $value) {
+    $horasAprovada = ($value->total != NULL) ? $value->total : '0';
+}
 
 
 ?>
@@ -21,7 +25,7 @@ foreach ($alunos as $key => $value) {
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="mr-6">
                             <div class="card-title">Horas Cadastradas</div>
-                            <h1 class="text-lg font-weight-bold"><?php echo $horasCadastradas; ?></h1>
+                            <h1 class="text-lg font-weight-bold"><?php echo $horasCadastrada; ?></h1>
                         </div>
 
                         <svg height="80" viewBox="0 0 496 496" width="80" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +63,7 @@ foreach ($alunos as $key => $value) {
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="mr-6">
                             <div class="card-title">Horas Aprovadas</div>
-                            <h1 class="text-lg font-weight-bold">24/100</h1>
+                            <h1 class="text-lg font-weight-bold"><?php echo $horasAprovada;?></h1>
                         </div>
 
                         <svg id="Layer_5" enable-background="new 0 0 64 64" height="80" viewBox="0 0 64 64" width="80" xmlns="http://www.w3.org/2000/svg">
