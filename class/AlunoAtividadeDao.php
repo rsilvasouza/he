@@ -17,7 +17,7 @@ abstract class AlunoAtividadeDao extends DB
     }
 
     public function horasCadastradas($id){
-        $sql = "SELECT time_format( SEC_TO_TIME( SUM( TIME_TO_SEC( a.horas_registradas ) ) ),'%H:%i') AS total
+        $sql = "SELECT time_format( SEC_TO_TIME( SUM( TIME_TO_SEC( a.carga_horaria ) ) ),'%H:%i') AS total
                 FROM $this->table a INNER JOIN atividade at
                 ON a.atividade_id = at.id where a.aluno_id = :id AND a.status = -1";
         $stmt = DB::prepare($sql);
@@ -27,7 +27,7 @@ abstract class AlunoAtividadeDao extends DB
     }
 
     public function horasAprovadas($id){
-        $sql = "SELECT time_format( SEC_TO_TIME( SUM( TIME_TO_SEC( a.horas_registradas ) ) ),'%H:%i') AS total
+        $sql = "SELECT time_format( SEC_TO_TIME( SUM( TIME_TO_SEC( a.carga_horaria ) ) ),'%H:%i') AS total
                 FROM $this->table a INNER JOIN atividade at
                 ON a.atividade_id = at.id where a.aluno_id = :id AND a.status = 1";
         $stmt = DB::prepare($sql);
@@ -38,7 +38,7 @@ abstract class AlunoAtividadeDao extends DB
 
     public function findAtividadesCadastradas($id)
     {
-        $sql = "SELECT at.nome, a.descricao, a.horas_registradas, a.arquivo, a.data_atividade, a.status, a.id
+        $sql = "SELECT at.nome, a.*
                 FROM $this->table a INNER JOIN atividade at
                 ON a.atividade_id = at.id where a.aluno_id = :id";
         $stmt = DB::prepare($sql);

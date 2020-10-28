@@ -6,14 +6,17 @@ class AlunoAtividade extends AlunoAtividadeDao
   protected $table = "aluno_atividade";
   private $id;
   private $descricao;
-  private $horas;
-  private $dataAtividade;
+  private $cargaHoraria;
   private $status;
   private $arquivo;
-  private $dataRegistro;
+  private $dataInicial;
+  private $dataFinal;
+  private $observacao;
+  private $motivo;
   private $alunoId;
   private $atividadeId;
   private $administradorId;
+  private $dataRegistro;
 
   public function getTable()
   {
@@ -45,24 +48,14 @@ class AlunoAtividade extends AlunoAtividadeDao
     $this->descricao = $descricao;
   }
 
-  public function getHoras()
+  public function getCargaHoraria()
   {
-    return $this->horas;
+    return $this->cargaHoraria;
   }
 
-  public function setHoras($horas)
+  public function setCargaHoraria($cargaHoraria)
   {
-    $this->horas = $horas;
-  }
-
-  public function getDataAtividade()
-  {
-    return $this->dataAtividade;
-  }
-
-  public function setDataAtividade($dataAtividade)
-  {
-    $this->dataAtividade = $dataAtividade;
+    $this->cargaHoraria = $cargaHoraria;
   }
 
   public function getStatus()
@@ -85,14 +78,44 @@ class AlunoAtividade extends AlunoAtividadeDao
     $this->arquivo = $arquivo;
   }
 
-  public function getDataRegistro()
+  public function getDataInicial()
   {
-    return $this->dataRegistro;
+    return $this->dataInicial;
   }
 
-  public function setDataRegistro($dataRegistro)
+  public function setDataInicial($dataInicial)
   {
-    $this->dataRegistro = $dataRegistro;
+    $this->dataInicial = $dataInicial;
+  }
+
+  public function getDataFinal()
+  {
+    return $this->dataFinal;
+  }
+
+  public function setDataFinal($dataFinal)
+  {
+    $this->dataFinal = $dataFinal;
+  }
+
+  public function getObservacao()
+  {
+    return $this->observacao;
+  }
+
+  public function setObservacao($observacao)
+  {
+    $this->observacao = $observacao;
+  }
+
+  public function getMotivo()
+  {
+    return $this->motivo;
+  }
+
+  public function setMotivo($motivo)
+  {
+    $this->motivo = $motivo;
   }
 
   public function getAlunoId()
@@ -125,21 +148,33 @@ class AlunoAtividade extends AlunoAtividadeDao
     $this->administradorId = $administradorId;
   }
 
+  public function getDataRegistro()
+  {
+    return $this->dataRegistro;
+  }
+
+  public function setDataRegistro($dataRegistro)
+  {
+    $this->dataRegistro = $dataRegistro;
+  }
+
   public function insert()
   {
-    $sql = "INSERT INTO $this->table (descricao, atividade_id, horas_registradas, data_atividade, arquivo, aluno_id)
+    $sql = "INSERT INTO $this->table (descricao, atividade_id, carga_horaria, arquivo, data_inicial, data_final, aluno_id)
             VALUES (:descricao,
                     :atividadeId,
-                    :horasRegistradas,
-                    :dataAtividade,
+                    :cargaHoraria,
                     :arquivo,
+                    :dataInicial,
+                    :dataFinal,
                     :alunoId)";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('descricao', $this->descricao);
     $stmt->bindParam('atividadeId', $this->atividadeId);
-    $stmt->bindParam('horasRegistradas', $this->horas);
-    $stmt->bindParam('dataAtividade', $this->dataAtividade);
+    $stmt->bindParam('cargaHoraria', $this->cargaHoraria);
     $stmt->bindParam('arquivo', $this->arquivo);
+    $stmt->bindParam('dataInicial', $this->dataInicial);
+    $stmt->bindParam('dataFinal', $this->dataFinal);
     $stmt->bindParam('alunoId', $this->alunoId);
     return $stmt->execute();
   }

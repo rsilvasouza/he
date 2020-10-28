@@ -18,23 +18,24 @@ $atividade = new Atividade();
     <table id="listar" class="display" style="width:100%">
         <thead class="text-center">
             <tr>
-                <th>Nome da Atividade</th>    
-                <th>Tipo de Atividade</th>    
-                <th>Horas</th>
-                <th>Data do Cadastro</th>
+                <th>Nome da Atividade</th>
+                <th>Tipo de Atividade</th>
+                <th>Período da Atividade</th>
+                <th>Carga Horária</th>
                 <th>Situação</th>
                 <th>Arquivo</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
-        <?php foreach ($alunoAtividade->findAtividadesCadastradas($_SESSION['idAluno']) as $key => $value) : ?>
+        <?php foreach ($alunoAtividade->findAtividadesCadastradas($_SESSION['idAluno']) as $key => $value) : 
+            $periodo = ($value->data_inicial == $value->data_final) ? date("d/m/Y", strtotime($value->data_inicial)) : date("d/m/Y", strtotime($value->data_inicial)) . " - " . date("d/m/Y", strtotime($value->data_final));
+        ?>
             <tr>
-            <td><?php echo $value->descricao; ?></td>    
-            <td><?php echo $value->nome; ?></td>
-                <td class="text-center"><?php echo $value->horas_registradas; ?></td>
-                
-                <td class="text-center"><?php echo date("d/m/Y", strtotime($value->data_atividade));?></td>
+                <td><?php echo $value->descricao; ?></td>
+                <td><?php echo $value->nome; ?></td>
+                <td class="text-center"><?php echo $periodo; ?> </td>
+                <td class="text-center"><?php echo $value->carga_horaria; ?></td>
                 <td class="text-center"><?php echo $alunoAtividade->situacao($value->status); ?></td>
                 <td class="text-center">
                     <a class="btn btn-info" href="arquivos/<?php echo $value->arquivo; ?>" download="<?php echo $value->descricao; ?>">
@@ -42,7 +43,7 @@ $atividade = new Atividade();
                     </a>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\''. $value->id . '\',' . '\''. $value->descricao . '\',' . '\''. $value->nome . '\',' . '\''. $value->horas_registradas . '\',' . '\''. $value->data_atividade . '\'' ?>)">Editar</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->nome . '\',' . '\'' . $value->carga_horaria . '\'' ?>)">Editar</button>
                 </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)">Excluir</button>
@@ -65,7 +66,7 @@ $atividade = new Atividade();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="cursoController.php">
+            <form method="post" action="">
                 <input type="hidden" name="idExcluir" id="idExcluir">
 
                 <div class="modal-footer">
@@ -88,7 +89,7 @@ $atividade = new Atividade();
                 </button>
             </div>
 
-            <form enctype="multipart/form-data" method="post" action="atividadeAlunoController.php">
+            <form enctype="multipart/form-data" method="post" action="alunoAtividadeController.php">
                 <div class="modal-body text-left">
                     <input type="hidden" value="<?php echo $value->id; ?>" name="id" id="id">
                     <div class="form-row">
@@ -104,7 +105,7 @@ $atividade = new Atividade();
                             <select class="form-control" name="atividade" id="atividade">
                                 <option value="">Selecione</option>
                                 <?php foreach ($atividade->findAll() as $key => $value) : ?>
-                                    <option value="<?php echo $value->id; ?>" <?php ($value->id == VALOR_DO_BANCO) ? 'selected' : '';?>><?php echo $value->nome; ?></option>
+                                    <option value="<?php echo $value->id; ?>" <?php ($value->id == $value->id) ? 'selected' : ''; ?>><?php echo $value->nome; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -112,24 +113,27 @@ $atividade = new Atividade();
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Horas</label>
-                            <input type="time" name="horas" id="horas" class="form-control" aria-describedby="helpId">
+                            <label>Período da Atividade</label>
+                            <input type="date" name="dataInicial" id="dataInicial" class="form-control" aria-describedby="helpId">
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label>Data de Realização</label>
-                            <input type="date" name="datas" id="datas" class="form-control" aria-describedby="helpId">
+                            <label>&nbsp;</label>
+                            <input type="date" name="dataFinal" id="dataFinal" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-6">
+                            <label>Carga Horária</label>
+                            <input type="time" name="cargaHoraria" id="cargaHoraria" class="form-control" aria-describedby="helpId">
+                        </div>
+
+                        <div class="form-group col-md-6">
                             <label>Anexar Arquivo</label>
                             <input type="file" name="arquivo" id="arquivo" class="form-control-file" aria-describedby="helpId">
                         </div>
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="submit" name="editar" class="btn btn-success">Editar</button>
@@ -150,7 +154,7 @@ $atividade = new Atividade();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form enctype="multipart/form-data" method="post" action="atividadeAlunoController.php">
+            <form enctype="multipart/form-data" method="post" action="alunoAtividadeController.php">
                 <div class="modal-body text-left">
 
                     <div class="form-row">
@@ -174,27 +178,30 @@ $atividade = new Atividade();
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Horas</label>
-                            <input type="time" name="horas" id="horas" class="form-control" aria-describedby="helpId">
+                            <label>Período da Atividade</label>
+                            <input type="date" name="dataInicial" id="dataInicial" class="form-control" aria-describedby="helpId">
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label>Data de Realização</label>
-                            <input type="date" name="data" id="data" class="form-control" aria-describedby="helpId">
+                            <label>&nbsp;</label>
+                            <input type="date" name="dataFinal" id="dataFinal" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-6">
+                            <label>Carga Horária</label>
+                            <input type="time" name="cargaHoraria" id="cargaHoraria" class="form-control" aria-describedby="helpId">
+                        </div>
+
+                        <div class="form-group col-md-6">
                             <label>Anexar Arquivo</label>
                             <input type="file" name="arquivo" id="arquivo" class="form-control-file" aria-describedby="helpId">
                         </div>
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="cadastrar" class="btn btn-success">Salvar</button>
+                    <button type="submit" name="cadastrar" id="botao" class="btn btn-success">Salvar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </form>
@@ -211,16 +218,24 @@ $atividade = new Atividade();
         });
     });
 
-    function preencheDados(tipo, id, descricao, atividade, hora, data) {
+    function preencheDados(tipo, id, descricao, atividade, cargaHoraria) {
         if (tipo == 'editar') {
             $('#id').val(id);
             $('#descricao').val(descricao);
             $('#atividade').val(atividade);
-            $('#horas').val(hora);
-            $('#datas').val(data);
+            $('#cargaHoraria').val(cargaHoraria);
         } else if (tipo == 'excluir') {
             $('#idExcluir').val(id);
         }
-
     }
+
+    // function validaPeriodo(dataInicial, dataFinal){
+    //     if(dataFinal < dataInicial){
+    //         document.getElementById("botao").disabled = true;
+    //         return elemento.style.backgroundColor = "yellow";
+    //     }else{
+    //         document.getElementById("botao").disabled = false;
+    //         return elemento.style.backgroundColor = "";
+    //     }
+    // }
 </script>

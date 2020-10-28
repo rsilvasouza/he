@@ -97,14 +97,17 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `she`.`aluno_atividade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(300) NOT NULL,
-  `horas_registradas` TIME NOT NULL,
+  `carga_horaria` TIME NOT NULL,
   `status` TINYINT NULL DEFAULT -1,
-  `arquivo` VARCHAR(255) NULL DEFAULT NULL,
-  `data_atividade` DATE NOT NULL,
-  `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `arquivo` VARCHAR(255) NOT NULL,
+  `data_inicial` DATE NOT NULL,
+  `data_final` DATE NOT NULL,
+  `observacao` VARCHAR(1000) NULL,
+  `motivo` VARCHAR(255) NULL,
   `aluno_id` INT NOT NULL,
   `atividade_id` INT NOT NULL,
   `administrador_id` INT NULL DEFAULT NULL,
+  `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (`id`, `aluno_id`, `atividade_id`),
   -- INDEX `atividade_id` (`atividade_id` ASC) VISIBLE,
@@ -119,9 +122,9 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- SET SQL_MODE=@OLD_SQL_MODE;
+-- SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+-- SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- Dados da Tabela Curso
 INSERT INTO curso (nome, sigla, data_registro) VALUES ('Sistema da Informação', 'SI', DEFAULT);
