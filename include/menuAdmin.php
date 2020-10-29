@@ -4,6 +4,7 @@
             <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></form>
         <!-- Navbar-->
+        <div class="text-light"><?php echo "Olá " . strtok($_SESSION['nome'], ' '); ?></div>
         <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
@@ -49,6 +50,17 @@
                             <div class="collapse" id="alunos" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="alunoCadastrado.php">Aprovar Cadastros</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#atividades" aria-expanded="false" aria-controls="atividades">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Atividades
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="atividades" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="atividadeCadastrada.php">Atividades Cadastradas</a>
                                 </nav>
                             </div>
 

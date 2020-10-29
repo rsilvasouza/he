@@ -17,7 +17,10 @@ if (isset($_POST['logar'])) {
         $administrador->setSenha($_POST['senha']);
 
         if ($administrador->autenticar()) {
+            $dados = $administrador->findEmail($_POST['email']);
             $_SESSION['status'] = 'logado';
+            $_SESSION['idAdministrador'] = $dados[0]->id;
+            $_SESSION['nome'] = $dados[0]->nome;
             $_SESSION['perfil'] = '1';
             $_SESSION['idUsuario'] = '';
             header("location: index.php");

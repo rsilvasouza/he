@@ -8,7 +8,7 @@ abstract class AlunoDao extends DB
     abstract public function insert();
     abstract public function update();
 
-   public function findAll()
+    public function findAll()
     {
         $sql = "SELECT * FROM $this->table";
         $stmt = DB::prepare($sql);
@@ -24,7 +24,7 @@ abstract class AlunoDao extends DB
         return $stmt->fetchAll();
     }
 
-    
+
 
     public function findMatricula($matricula)
     {
@@ -65,22 +65,31 @@ abstract class AlunoDao extends DB
     }
 
     public function atualizaStatus($id, $status)
-  {
-    $sql = "UPDATE $this->table SET status = :status WHERE id = :id";                                    
-    $stmt = DB::prepare($sql);
-    $stmt->bindParam('status', $status);
-    $stmt->bindParam('id', $id);
-    return $stmt->execute();
-  }
+    {
+        $sql = "UPDATE $this->table SET status = :status WHERE id = :id";
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam('status', $status);
+        $stmt->bindParam('id', $id);
+        return $stmt->execute();
+    }
 
-  public function horasCadastradas($id){
-    $sql = "SELECT count(*) AS total FROM $this->table a INNER JOIN aluno_atividade atv ON
+    public function horasCadastradas($id)
+    {
+        $sql = "SELECT count(*) AS total FROM $this->table a INNER JOIN aluno_atividade atv ON
             atv.aluno_id = a.id WHERE a.id = :id AND atv.status IS NULL";
-    $stmt = DB::prepare($sql);
-    $stmt->bindParam('id', $id);
-    $stmt->execute();
-    return $stmt->fetchAll();
-  }
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam('id', $id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function contasCadastradas()
+    {
+        $sql = "SELECT COUNT(*) AS total FROM $this->table WHERE status IS NULL";
+        $stmt = DB::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
     public function delete($id)
     {

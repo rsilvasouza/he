@@ -30,13 +30,15 @@ $atividade = new Atividade();
         </thead>
         <?php foreach ($alunoAtividade->findAtividadesCadastradas($_SESSION['idAluno']) as $key => $value) : 
             $periodo = ($value->data_inicial == $value->data_final) ? date("d/m/Y", strtotime($value->data_inicial)) : date("d/m/Y", strtotime($value->data_inicial)) . " - " . date("d/m/Y", strtotime($value->data_final));
+            $motivo = ($value->motivo == NULL) ? '' : " - " . $value->motivo;
+            
         ?>
             <tr>
                 <td><?php echo $value->descricao; ?></td>
                 <td><?php echo $value->nome; ?></td>
                 <td class="text-center"><?php echo $periodo; ?> </td>
                 <td class="text-center"><?php echo $value->carga_horaria; ?></td>
-                <td class="text-center"><?php echo $alunoAtividade->situacao($value->status); ?></td>
+                <td class="text-center"><?php echo $alunoAtividade->situacao($value->status) . $motivo; ?></td>
                 <td class="text-center">
                     <a class="btn btn-info" href="arquivos/<?php echo $value->arquivo; ?>" download="<?php echo $value->descricao; ?>">
                         <i class="fas fa-cloud-download-alt"></i> Download

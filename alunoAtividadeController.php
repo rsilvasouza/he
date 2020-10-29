@@ -61,7 +61,44 @@
         } catch (Exception $ex) {
             Erro::trataErro($ex);
         }
-    }
+    } else if (isset($_POST['aprovar']) && $_POST['idAprovar'] != 0) {
+
+        try {
+            $id = $_POST['idAprovar'];
+            $status = 1;
+
+            if ($alunoAtividade->aprovar($id, $status)) :
+                $_SESSION['msgSucesso'] = "Atividade aprovada com sucesso!";
+                header("location: atividadeCadastrada.php");
+                exit();
+            else :
+                $_SESSION['msgErro'] = "Ocorreu um erro durante a aprovação do registo, por favor tente novamente";
+                header("location: atividadeCadastrada.php");
+                exit();
+            endif;
+        } catch (Exception $ex) {
+            Erro::trataErro($ex);
+        }
+    } else if (isset($_POST['rejeitar']) && $_POST['idRejeitar'] != 0) {
+
+        try {
+            $id = $_POST['idRejeitar'];
+            $motivo = $_POST['motivo'];
+            $status = 0;
+
+            if ($alunoAtividade->rejeitar($id, $motivo, $status)) :
+                $_SESSION['msgSucesso'] = "Atividade <b>Rejeitada</b> com sucesso!";
+                header("location: atividadeCadastrada.php");
+                exit();
+            else :
+                $_SESSION['msgErro'] = "Ocorreu um erro durante a rejeição do registo, por favor tente novamente";
+                header("location: atividadeCadastrada.php");
+                exit();
+            endif;
+        } catch (Exception $ex) {
+            Erro::trataErro($ex);
+        }
+    } 
     //  else if (isset($_POST['editar'])) {
 
     //     try {

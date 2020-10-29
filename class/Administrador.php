@@ -117,7 +117,7 @@ class Administrador extends AdministradorDao
 
     public function autenticar()
     {
-        $sql = "SELECT email, senha FROM $this->table WHERE email = :email AND senha = :senha";
+        $sql = "SELECT nome, email, senha FROM $this->table WHERE email = :email AND senha = :senha";
         $stmt = DB::prepare($sql);
         $stmt->bindParam('email', $this->email);
         $stmt->bindParam('senha', $this->senha);
