@@ -13,18 +13,18 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema she
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `she` ;
+DROP SCHEMA IF EXISTS `id15253311_she` ;
 
 -- -----------------------------------------------------
 -- Schema she
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `she` ;
-USE `she` ;
+CREATE SCHEMA IF NOT EXISTS `id15253311_she` ;
+USE `id15253311_she` ;
 
 -- -----------------------------------------------------
--- Table `she`.`administrador`
+-- Table `id15253311_she`.`administrador`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `she`.`administrador` (
+CREATE TABLE IF NOT EXISTS `id15253311_she`.`administrador` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `matricula` VARCHAR(20) NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
@@ -37,9 +37,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `she`.`curso`
+-- Table `id15253311_she`.`curso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `she`.`curso` (
+CREATE TABLE IF NOT EXISTS `id15253311_she`.`curso` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `sigla` VARCHAR(5) NOT NULL,
@@ -50,9 +50,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `she`.`aluno`
+-- Table `id15253311_she`.`aluno`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `she`.`aluno` (
+CREATE TABLE IF NOT EXISTS `id15253311_she`.`aluno` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `matricula` VARCHAR(20) NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
@@ -69,18 +69,18 @@ CREATE TABLE IF NOT EXISTS `she`.`aluno` (
   -- INDEX `administrador_id` (`administrador_id` ASC) VISIBLE,
   CONSTRAINT `aluno_ibfk_1`
     FOREIGN KEY (`curso_id`)
-    REFERENCES `she`.`curso` (`id`),
+    REFERENCES `id15253311_she`.`curso` (`id`),
   CONSTRAINT `aluno_ibfk_2`
     FOREIGN KEY (`administrador_id`)
-    REFERENCES `she`.`administrador` (`id`))
+    REFERENCES `id15253311_she`.`administrador` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `she`.`atividade`
+-- Table `id15253311_she`.`atividade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `she`.`atividade` (
+CREATE TABLE IF NOT EXISTS `id15253311_she`.`atividade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `modo_comprovacao` VARCHAR(255) NULL DEFAULT NULL,
@@ -92,9 +92,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `she`.`aluno_atividade`
+-- Table `id15253311_she`.`aluno_atividade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `she`.`aluno_atividade` (
+CREATE TABLE IF NOT EXISTS `id15253311_she`.`aluno_atividade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(300) NOT NULL,
   `carga_horaria` TIME NOT NULL,
@@ -114,10 +114,10 @@ CREATE TABLE IF NOT EXISTS `she`.`aluno_atividade` (
   -- INDEX `aluno_id` (`aluno_id` ASC) VISIBLE,
   CONSTRAINT `aluno_atividade_ibfk_1`
     FOREIGN KEY (`atividade_id`)
-    REFERENCES `she`.`atividade` (`id`),
+    REFERENCES `id15253311_she`.`atividade` (`id`),
   CONSTRAINT `aluno_atividade_ibfk_2`
     FOREIGN KEY (`aluno_id`)
-    REFERENCES `she`.`aluno` (`id`))
+    REFERENCES `id15253311_she`.`aluno` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -156,3 +156,65 @@ INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES(
 INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação em Empresa Junior", "Registro de posse em ata", 30, DEFAULT);
 INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação em simulado promovido pela IES", "Ata de presença", 20, DEFAULT);
 INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro) VALUES("Participação em avaliação institucional promovida pela IES", "Ata de presença", 20, DEFAULT);
+
+-- Dados e Alunos Faker
+-- Alunos Cadastrados
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000001','CARLA PITANGUI ALCANTARA NOGUEIRA','carla@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000002','ROSILANE CARLA SILVA YANOWICH','rosilane@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,2);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000003','VANESSA SOARES SIMÕES','vanessa@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',2,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000004','DANIELE RAMALHO DA SILVA SAMUEL','daniele@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',2,2);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000005','SAULO LIMA DA SILVA YANOWICH','saulo@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000006','NATHIANE DIAS IZABEL','nathiane@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',2,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000007','JOÃO ROBERTO DA SILVA DANTAS','joao@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,2);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000008','KARINA DO COUTO ALMEIDA','karina@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',2,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000009','EDILSON DOS SANTOS YATUHARA','edilson@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id) VALUES ('1220466000010','PRISCILA MONTEIRO SENRA DE OLIVEIRA', 'priscila@teste.com.br','e10adc3949ba59abbe56e057f20f883e',2,1);
+
+-- alunos ativos
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000011','PRISCILA BARBOZA RODRIGUES','pbarbosa@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,2,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000012','DAYANE FERNANDES DA CUNHA BARRETO','dayabe@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',2,2,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000013','THAYNA DA SILVA TOME','thayna@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',2,1,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000014','GEOFFREY SOUZA DOS SANTOS','geoffrey@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,1,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000015','LUCIANA RIBEIRO DA SILVA','luciana@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,2,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000016','FABIANA THOMAZ MUNIZ','fabiana@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,2,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000017','MÁRIO SÉRGIO RODRIGUES DA SILVA','mario@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',1,1,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000019','DEBORA LOPES DA SILVA PIRES','debora@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',2,1,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000010','LUCIANA BEATRIZ DE SOUZA SILVA','lbeatriz@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',2,2,1);
+INSERT INTO aluno (matricula, nome, email, senha, turno, curso_id, status) VALUES ('1220466000020','ALEXANDRE ARAUJO DE JESUS','alexandre@teste.com.br', 'e10adc3949ba59abbe56e057f20f883e',2,2,1);
+
+-- atividades cadastradas
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '01:00:00', -1, 'modelo.jpg', '2020-05-05', '2020-05-05', 11, 1);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '10:00:00', -1, 'modelo.jpg', '2020-06-01', '2020-06-20', 11, 3);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '00:30:00', -1, 'modelo.jpg', '2020-07-01', '2020-07-01', 11, 4);
+
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '05:00:00', -1, 'modelo.jpg', '2020-08-15', '2020-08-15', 12, 5);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '03:00:00', -1, 'modelo.jpg', '2020-07-02', '2020-08-01', 12, 2);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '00:45:00', -1, 'modelo.jpg', '2020-07-01', '2020-07-01', 12, 1);
+
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '04:00:00', -1, 'modelo.jpg', '2020-09-05', '2020-09-05', 13, 8);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '16:00:00', -1, 'modelo.jpg', '2020-09-02', '2020-09-09', 13, 5);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '02:30:00', -1, 'modelo.jpg', '2020-09-25', '2020-09-27', 13, 10);
+
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '01:00:00', -1, 'modelo.jpg', '2020-05-05', '2020-05-05', 14, 1);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '10:00:00', -1, 'modelo.jpg', '2020-06-01', '2020-06-20', 14, 3);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '00:30:00', -1, 'modelo.jpg', '2020-07-01', '2020-07-01', 14, 4);
+
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '05:00:00', -1, 'modelo.jpg', '2020-08-15', '2020-08-15', 15, 5);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '03:00:00', -1, 'modelo.jpg', '2020-07-02', '2020-08-01', 15, 2);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '00:45:00', -1, 'modelo.jpg', '2020-07-01', '2020-07-01', 15, 1);
+
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '04:00:00', -1, 'modelo.jpg', '2020-09-05', '2020-09-05', 16, 8);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '16:00:00', -1, 'modelo.jpg', '2020-09-02', '2020-09-09', 16, 5);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '02:30:00', -1, 'modelo.jpg', '2020-09-25', '2020-09-27', 16, 10);
+
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '01:00:00', -1, 'modelo.jpg', '2020-05-05', '2020-05-05', 17, 9);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '10:00:00', -1, 'modelo.jpg', '2020-06-01', '2020-06-20', 17, 3);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '00:30:00', -1, 'modelo.jpg', '2020-07-01', '2020-07-01', 17, 2);
+
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '02:00:00', -1, 'modelo.jpg', '2020-08-15', '2020-08-15', 18, 11);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '01:00:00', -1, 'modelo.jpg', '2020-07-02', '2020-08-01', 18, 10);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '05:00:00', -1, 'modelo.jpg', '2020-07-01', '2020-07-01', 18, 4);
+
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '20:00:00', -1, 'modelo.jpg', '2020-09-05', '2020-09-05', 19, 7);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '16:00:00', -1, 'modelo.jpg', '2020-09-02', '2020-09-09', 19, 6);
+INSERT INTO aluno_atividade (descricao, carga_horaria, status, arquivo, data_inicial, data_final, aluno_id, atividade_id) VALUES ('Descrição da Atividade', '40:30:00', -1, 'modelo.jpg', '2020-09-25', '2020-09-27', 19, 10);

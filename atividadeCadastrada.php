@@ -11,9 +11,6 @@ $atividade = new Atividade();
         <div class="form-group col-md-10">
             <h1>Atividades Cadastradas</h1>
         </div>
-        <div class="form-group col-md-2">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastrar">Cadastrar</button>
-        </div>
     </div>
     <table id="listar" class="display" style="width:100%">
         <thead class="text-center">
@@ -115,7 +112,7 @@ $atividade = new Atividade();
 <script>
     $(document).ready(function() {
         $('#listar').dataTable({
-            searching: false
+            searching: true
         });
     });
 
@@ -127,14 +124,4 @@ $atividade = new Atividade();
             $('#idAprovar').val(id);
         }
     }
-
-    // function validaPeriodo(dataInicial, dataFinal){
-    //     if(dataFinal < dataInicial){
-    //         document.getElementById("botao").disabled = true;
-    //         return elemento.style.backgroundColor = "yellow";
-    //     }else{
-    //         document.getElementById("botao").disabled = false;
-    //         return elemento.style.backgroundColor = "";
-    //     }
-    // }
 </script>
