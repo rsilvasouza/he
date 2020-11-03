@@ -26,14 +26,17 @@ if ($_SESSION['status'] != 'logado') {
 
     <!-- Template -->
     <link href="dist/css/styles.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-
+        
     <!-- Bootstrap -->
     <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.css">
 
     <!-- DataTable -->
-    <link rel="stylesheet" href="vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="vendor/datatables/datatables/media/css/jquery.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="vendor/datatables/datatables/media/css/jquery.dataTables.min.css"> -->
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css">
+
 </head>
 
 <body class="sb-nav-fixed">

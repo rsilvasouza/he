@@ -91,6 +91,31 @@ abstract class AlunoDao extends DB
         return $stmt->fetchAll();
     }
 
+    public function listarAlunosComAtividade()
+    {
+        $sql = "SELECT a.matricula, a.nome AS aluno, c.sigla AS curso, a.turno, at.nome AS atividade, aa.carga_horaria, aa.status FROM $this->table a 
+                INNER JOIN curso c ON c.id = a.curso_id 
+                INNER JOIN aluno_atividade aa ON aa.aluno_id = a.id
+                INNER JOIN atividade at ON at.id = aa.atividade_id";
+        $stmt = DB::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function listarAlunosComHorasAverbadas()
+    {
+        $sql = "SELECT a.matricula, a.nome AS aluno, c.sigla AS curso, a.turno, SEC_TO_TIME( SUM( TIME_TO_SEC( aa.carga_horaria ) ) ) AS horas FROM $this->table a 
+                INNER JOIN curso c ON c.id = a.curso_id 
+                INNER JOIN aluno_atividade aa ON aa.aluno_id = a.id
+                INNER JOIN atividade at ON at.id = aa.atividade_id 
+                WHERE aa.status = 1
+                GROUP BY  a.nome 
+                ORDER BY a.matricula";
+        $stmt = DB::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function delete($id)
     {
         $sql = "DELETE FROM $this->table WHERE id = :id";

@@ -216,7 +216,8 @@ $atividade = new Atividade();
 <script>
     $(document).ready(function() {
         $('#listar').dataTable({
-            searching: false
+            searching: false,
+            responsive: true
         });
     });
 

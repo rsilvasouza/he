@@ -112,7 +112,8 @@ $atividade = new Atividade();
 <script>
     $(document).ready(function() {
         $('#listar').dataTable({
-            searching: true
+            searching: true,
+            responsive: true
         });
     });
 

@@ -101,7 +101,8 @@ $aluno = new Aluno();
 <script>
    $(document).ready(function() {
         $('#listar').dataTable({
-            searching: false
+            searching: false,
+            responsive: true
         });
     } );
 
