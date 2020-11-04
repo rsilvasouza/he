@@ -58,7 +58,7 @@ class Administrador extends AdministradorDao
 
     public function setEmail($email)
     {
-        $this->email = $email;
+        $this->email = trim($email);
     }
 
     public function getSenha()

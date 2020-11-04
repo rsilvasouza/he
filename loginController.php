@@ -17,7 +17,7 @@ if (isset($_POST['logar'])) {
         $administrador->setSenha($_POST['senha']);
 
         if ($administrador->autenticar()) {
-            $dados = $administrador->findEmail($_POST['email']);
+            $dados = $administrador->findEmail($administrador->getEmail());
             $_SESSION['status'] = 'logado';
             $_SESSION['idAdministrador'] = $dados[0]->id;
             $_SESSION['nome'] = $dados[0]->nome;
@@ -27,14 +27,14 @@ if (isset($_POST['logar'])) {
             exit();
         } else if ($aluno->autenticar()) {
             
-            $dados = $aluno->findEmail($_POST['email']);
+            $dados = $aluno->findEmail($aluno->getEmail());
             $_SESSION['status'] = 'logado';
             $_SESSION['idAluno'] = $dados[0]->id;
             $_SESSION['nome'] = $dados[0]->nome;
             $_SESSION['perfil'] = '2';
             header("location: aluno.php");
             exit();
-        } else if($aluno->verificaStatus($_POST['email'])){
+        } else if($aluno->verificaStatus($aluno->getEmail())){
             $_SESSION['msgInfo'] = "Usuário já cadastrado. <b>Aguardando Aprovação!</b>";
             header("location: login.php");
             exit();
