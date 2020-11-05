@@ -13,18 +13,18 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema she
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `id15253311_she` ;
+DROP SCHEMA IF EXISTS `she` ;
 
 -- -----------------------------------------------------
 -- Schema she
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `id15253311_she` ;
-USE `id15253311_she` ;
+CREATE SCHEMA IF NOT EXISTS `she` ;
+USE `she` ;
 
 -- -----------------------------------------------------
--- Table `id15253311_she`.`administrador`
+-- Table `she`.`administrador`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `id15253311_she`.`administrador` (
+CREATE TABLE IF NOT EXISTS `she`.`administrador` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `matricula` VARCHAR(20) NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
@@ -37,9 +37,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `id15253311_she`.`curso`
+-- Table `she`.`curso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `id15253311_she`.`curso` (
+CREATE TABLE IF NOT EXISTS `she`.`curso` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `sigla` VARCHAR(5) NOT NULL,
@@ -50,9 +50,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `id15253311_she`.`aluno`
+-- Table `she`.`aluno`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `id15253311_she`.`aluno` (
+CREATE TABLE IF NOT EXISTS `she`.`aluno` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `matricula` VARCHAR(20) NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
@@ -69,18 +69,18 @@ CREATE TABLE IF NOT EXISTS `id15253311_she`.`aluno` (
   -- INDEX `administrador_id` (`administrador_id` ASC) VISIBLE,
   CONSTRAINT `aluno_ibfk_1`
     FOREIGN KEY (`curso_id`)
-    REFERENCES `id15253311_she`.`curso` (`id`),
+    REFERENCES `she`.`curso` (`id`),
   CONSTRAINT `aluno_ibfk_2`
     FOREIGN KEY (`administrador_id`)
-    REFERENCES `id15253311_she`.`administrador` (`id`))
+    REFERENCES `she`.`administrador` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `id15253311_she`.`atividade`
+-- Table `she`.`atividade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `id15253311_she`.`atividade` (
+CREATE TABLE IF NOT EXISTS `she`.`atividade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `modo_comprovacao` VARCHAR(255) NULL DEFAULT NULL,
@@ -92,9 +92,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `id15253311_she`.`aluno_atividade`
+-- Table `she`.`aluno_atividade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `id15253311_she`.`aluno_atividade` (
+CREATE TABLE IF NOT EXISTS `she`.`aluno_atividade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(300) NOT NULL,
   `carga_horaria` TIME NOT NULL,
@@ -114,10 +114,10 @@ CREATE TABLE IF NOT EXISTS `id15253311_she`.`aluno_atividade` (
   -- INDEX `aluno_id` (`aluno_id` ASC) VISIBLE,
   CONSTRAINT `aluno_atividade_ibfk_1`
     FOREIGN KEY (`atividade_id`)
-    REFERENCES `id15253311_she`.`atividade` (`id`),
+    REFERENCES `she`.`atividade` (`id`),
   CONSTRAINT `aluno_atividade_ibfk_2`
     FOREIGN KEY (`aluno_id`)
-    REFERENCES `id15253311_she`.`aluno` (`id`))
+    REFERENCES `she`.`aluno` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

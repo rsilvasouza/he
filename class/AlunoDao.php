@@ -37,6 +37,17 @@ abstract class AlunoDao extends DB
         return $stmt->fetchAll();
     }
 
+    public function buscaAluno($id)
+    {
+
+        $sql = "select * from $this->table WHERE id =:id";
+
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam('id', $id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function verificaStatus($email)
     {
 

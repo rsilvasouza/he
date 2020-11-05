@@ -16,6 +16,7 @@
 
 <!-- template -->
 <script src="custom/font-awesome.js" crossorigin="anonymous"></script>
+<script src="custom/custom.js" crossorigin="anonymous"></script>
 <script src="vendor/components/jquery/jquery.js"></script>
 
 <!-- Bootstrap -->

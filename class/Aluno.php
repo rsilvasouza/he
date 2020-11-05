@@ -187,6 +187,24 @@ class Aluno extends AlunoDao
     return $stmt->execute();
   }
 
+  public function updateSemSenha()
+  {
+    $sql = "UPDATE $this->table SET matricula = :matricula,
+                                    nome = :nome,
+                                    email = :email,
+                                    turno = :turno,
+                                    curso_id = :curso
+                                    WHERE id =:id";                                    
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam('matricula', $this->matricula);
+    $stmt->bindParam('nome', $this->nome);
+    $stmt->bindParam('email', $this->email);
+    $stmt->bindParam('turno', $this->turno);
+    $stmt->bindParam('curso', $this->curso);
+    $stmt->bindParam('id', $this->id);
+    return $stmt->execute();
+  }
+
   public function autenticar(){
         $sql = "SELECT id, email, senha FROM $this->table WHERE email = :email AND senha = :senha AND status =:status";
         $stmt = DB::prepare($sql);
