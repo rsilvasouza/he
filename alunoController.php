@@ -45,8 +45,7 @@ if (isset($_POST['cadastrar'])) {
         Erro::trataErro($ex);
     }
 }
-if (isset($_POST['editar']) && empty($_POST['senha'])) {
-
+if (isset($_POST['editar'])) {
     try {
         $aluno->setId($_POST['id']);
         $aluno->setMatricula($_POST['matricula']);
@@ -54,67 +53,32 @@ if (isset($_POST['editar']) && empty($_POST['senha'])) {
         $aluno->setEmail($_POST['email']);
         $aluno->setTurno($_POST['turno']);
         $aluno->setCurso($_POST['curso']);
+        $aluno->setSenha($_POST['senha']);
 
-        if ($aluno->updateSemSenha()) {
-            $_SESSION['msgSucesso'] = "Registro Alterado com sucesso!";
-            header("location: aluno.php");
-            exit();
-        } else {
-            $_SESSION['msgErro'] = "Erro ao Editar o seu cadastro!";
-            header("location: aluno.php");
+        if (empty($_POST['senha'])) {
+            if ($aluno->updateSemSenha()) {
+                $_SESSION['msgSucesso'] = "Registro Alterado com sucesso!";
+                header("location: aluno.php");
+                exit();
+            } else {
+                $_SESSION['msgErro'] = "Erro ao Editar o seu cadastro!";
+                header("location: aluno.php");
+            }
+        }
+        if (!empty($_POST['senha'])) {
+            if ($aluno->updateComSenha()) {
+                $_SESSION['msgSucesso'] = "Registro Alterado com sucesso!";
+                header("location: aluno.php");
+                exit();
+            } else {
+                $_SESSION['msgErro'] = "Erro ao Editar o seu cadastro!";
+                header("location: aluno.php");
+            }
         }
     } catch (Exception $ex) {
         Erro::trataErro($ex);
     }
-}
-// else if (isset($_POST['editar'])) {
-
-//     try {
-//         $aluno->setId($_POST['id']);
-//         $aluno->setNome($_POST['nome']);
-//         $aluno->setPostoGraduacao($_POST['pg']);
-//         $aluno->setMilitar($_POST['militar']);
-//         $aluno->setFuncao($_POST['funcao']);
-//         $aluno->setSecao($_POST['secao']);
-//         $aluno->setIp($_POST['ip']);
-//         $aluno->setMac($_POST['mac']);
-//         $aluno->setNumPatrimonio($_POST['numPatrimonio']);
-//         $aluno->setSistemaOperacional($_POST['so']);
-//         $aluno->setSoLicenciado($_POST['licenca']);
-//         $aluno->setObservacao($_POST['observacao']);
-//         $aluno->setUsuario($_POST['usuario']);
-
-//         if ($aluno->update()) :
-//             $_SESSION['msgSucesso'] = "Registro editada com sucesso!";
-//             header("location: maquina.php");
-//             exit();
-//         else :
-//             $_SESSION['msgErro'] = "Ocorreu um erro durante alterar o registo, por favor tente novamente";
-//             header("location: maquina.php");
-//             exit();
-//         endif;
-//     } catch (Exception $ex) {
-//         Erro::trataErro($ex);
-//     }
-// } else if ($_GET['acao'] == 'deletar' && $_GET['id'] != 0) {
-
-//     try {
-//         $id = $_GET['id'];
-
-//         if ($aluno->delete($id)) :
-//             $_SESSION['msgSucesso'] = "Registro excluido com sucesso!";
-//             header("location: maquina.php");
-//             exit();
-//         else :
-//             $_SESSION['msgErro'] = "Ocorreu um erro durante a exclusão do registo, por favor tente novamente";
-//             header("location: maquina.php");
-//             exit();
-//         endif;
-//     } catch (Exception $ex) {
-//         Erro::trataErro($ex);
-//     }
-// } 
-else {
+} else {
     $_SESSION['msgInfo'] = "Ops, algo de errado aconteceu!";
     header("location: index.php");
     exit();

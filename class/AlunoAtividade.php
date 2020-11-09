@@ -181,13 +181,45 @@ class AlunoAtividade extends AlunoAtividadeDao
 
   public function update()
   {
-    $sql = "UPDATE $this->table SET nome = :nome,
-                                    sigla = :sigla
+    $sql = "UPDATE $this->table SET descricao = :descricao,
+                                    atividade_id = :atividadeId,
+                                    carga_horaria = :cargaHoraria,
+                                    arquivo = :arquivo,
+                                    data_inicial = :dataInicial,
+                                    data_final = :dataFinal,
+                                    aluno_id = :alunoId
                                     WHERE id =:id";
     $stmt = DB::prepare($sql);
-    $stmt->bindParam('nome', $this->nome);
-    $stmt->bindParam('sigla', $this->sigla);
+    $stmt->bindParam('descricao', $this->descricao);
+    $stmt->bindParam('atividadeId', $this->atividadeId);
+    $stmt->bindParam('cargaHoraria', $this->cargaHoraria);
+    $stmt->bindParam('arquivo', $this->arquivo);
+    $stmt->bindParam('dataInicial', $this->dataInicial);
+    $stmt->bindParam('dataFinal', $this->dataFinal);
+    $stmt->bindParam('alunoId', $this->alunoId);
     $stmt->bindParam('id', $this->id);
+                
+    return $stmt->execute();
+  }
+
+  public function updateSemArquivo()
+  {
+    $sql = "UPDATE $this->table SET descricao = :descricao,
+                                    atividade_id = :atividadeId,
+                                    carga_horaria = :cargaHoraria,
+                                    arquivo = :arquivo,
+                                    data_inicial = :dataInicial,
+                                    data_final = :dataFinal
+                                    WHERE id =:id";
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam('descricao', $this->descricao);
+    $stmt->bindParam('atividadeId', $this->atividadeId);
+    $stmt->bindParam('cargaHoraria', $this->cargaHoraria);
+    $stmt->bindParam('dataInicial', $this->dataInicial);
+    $stmt->bindParam('dataFinal', $this->dataFinal);
+    $stmt->bindParam('alunoId', $this->alunoId);
+    $stmt->bindParam('id', $this->id);
+                
     return $stmt->execute();
   }
 

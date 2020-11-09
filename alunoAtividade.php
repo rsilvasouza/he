@@ -3,7 +3,7 @@ require_once 'include/topo.php';
 require_once 'classes.php';
 
 $alunoAtividade = new AlunoAtividade();
-$atividade = new Atividade();
+$atividades = new Atividade();
 
 ?>
 <div class="container-fluid">
@@ -31,7 +31,6 @@ $atividade = new Atividade();
         <?php foreach ($alunoAtividade->findAtividadesCadastradas($_SESSION['idAluno']) as $key => $value) : 
             $periodo = ($value->data_inicial == $value->data_final) ? date("d/m/Y", strtotime($value->data_inicial)) : date("d/m/Y", strtotime($value->data_inicial)) . " - " . date("d/m/Y", strtotime($value->data_final));
             $motivo = ($value->motivo == NULL) ? '' : " - " . $value->motivo;
-            
         ?>
             <tr>
                 <td><?php echo $value->descricao; ?></td>
@@ -45,7 +44,7 @@ $atividade = new Atividade();
                     </a>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->nome . '\',' . '\'' . $value->carga_horaria . '\'' ?>)">Editar</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->atividade_id . '\',' . '\'' . $value->data_inicial . '\',' . '\'' . $value->data_final . '\',' . '\'' . $value->carga_horaria . '\',' . '\'' . $value->arquivo . '\','?>)">Editar</button>
                 </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)">Excluir</button>
@@ -106,8 +105,8 @@ $atividade = new Atividade();
                             <label>Tipo de Atividade</label>
                             <select class="form-control" name="atividade" id="atividade">
                                 <option value="">Selecione</option>
-                                <?php foreach ($atividade->findAll() as $key => $value) : ?>
-                                    <option value="<?php echo $value->id; ?>" <?php ($value->id == $value->id) ? 'selected' : ''; ?>><?php echo $value->nome; ?></option>
+                                <?php foreach ($atividades->findAll() as $key => $atividade) : ?>
+                                    <option value="<?php echo $atividade->id; ?>" <?php echo ($atividade->id == $value->atividade_id) ? 'selected' : ''; ?>><?php echo $atividade->nome; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -171,8 +170,8 @@ $atividade = new Atividade();
                             <label>Tipo de Atividade</label>
                             <select class="form-control" name="atividade" id="atividade">
                                 <option value="">Selecione</option>
-                                <?php foreach ($atividade->findAll() as $key => $value) : ?>
-                                    <option value="<?php echo $value->id; ?>"><?php echo $value->nome; ?></option>
+                                <?php foreach ($atividades->findAll() as $key => $atividade) : ?>
+                                    <option value="<?php echo $atividade->id; ?>"><?php echo $atividade->nome; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -221,11 +220,13 @@ $atividade = new Atividade();
         });
     });
 
-    function preencheDados(tipo, id, descricao, atividade, cargaHoraria) {
+    function preencheDados(tipo, id, descricao, atividade, dataInicial, dataFinal, cargaHoraria) {
         if (tipo == 'editar') {
             $('#id').val(id);
             $('#descricao').val(descricao);
             $('#atividade').val(atividade);
+            $('#dataInicial').val(dataInicial);
+            $('#dataFinal').val(dataFinal);
             $('#cargaHoraria').val(cargaHoraria);
         } else if (tipo == 'excluir') {
             $('#idExcluir').val(id);
@@ -235,7 +236,9 @@ $atividade = new Atividade();
     // function validaPeriodo(dataInicial, dataFinal){
     //     if(dataFinal < dataInicial){
     //         document.getElementById("botao").disabled = true;
-    //         return elemento.style.backgroundColor = "yellow";
+    //         console.log(dataInicial);
+    //         console.log(dataFinal);
+    //         return alert ('Período inválido!');
     //     }else{
     //         document.getElementById("botao").disabled = false;
     //         return elemento.style.backgroundColor = "";
