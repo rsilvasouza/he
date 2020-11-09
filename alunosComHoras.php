@@ -21,6 +21,7 @@ $aluno = new Aluno();
                 <th>Tipo de Atividade</th>
                 <th>Carga Horária</th>
                 <th>Situação</th>
+                <th>Arquivos</th>
             </tr>
         </thead>
         <?php foreach ($aluno->listarAlunosComAtividade() as $key => $value) :
@@ -33,6 +34,11 @@ $aluno = new Aluno();
                 <td><?php echo $value->atividade; ?></td>
                 <td><?php echo substr($value->carga_horaria,0,5) . 'h'; ?></td>
                 <td><?php echo $alunoAtividade->situacao($value->status); ?></td>
+                <td class="text-center">
+                    <a class="btn btn-info" href="arquivos/<?php echo $value->arquivo; ?>" download="<?php echo $value->descricao; ?>">
+                        <i class="fas fa-cloud-download-alt"></i> Download
+                    </a>
+                </td>
 
             </tr>
 

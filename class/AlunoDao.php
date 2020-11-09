@@ -104,7 +104,7 @@ abstract class AlunoDao extends DB
 
     public function listarAlunosComAtividade()
     {
-        $sql = "SELECT a.matricula, a.nome AS aluno, c.sigla AS curso, a.turno, at.nome AS atividade, aa.carga_horaria, aa.status FROM $this->table a 
+        $sql = "SELECT a.matricula, a.nome AS aluno, c.sigla AS curso, a.turno, at.nome AS atividade, aa.carga_horaria, aa.status, aa.arquivo FROM $this->table a 
                 INNER JOIN curso c ON c.id = a.curso_id 
                 INNER JOIN aluno_atividade aa ON aa.aluno_id = a.id
                 INNER JOIN atividade at ON at.id = aa.atividade_id";
@@ -120,8 +120,7 @@ abstract class AlunoDao extends DB
                 INNER JOIN aluno_atividade aa ON aa.aluno_id = a.id
                 INNER JOIN atividade at ON at.id = aa.atividade_id 
                 WHERE aa.status = 1
-                GROUP BY  a.nome 
-                ORDER BY a.matricula";
+                GROUP BY  a.nome, c.sigla";
         $stmt = DB::prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
