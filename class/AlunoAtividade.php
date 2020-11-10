@@ -1,5 +1,5 @@
 <?php
-require_once 'AlunoAtividade.php';
+require_once 'AlunoAtividadeDAO.php';
 
 class AlunoAtividade extends AlunoAtividadeDao
 {
