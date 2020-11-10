@@ -80,7 +80,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `she`.`dimensao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `she`.`dimensao` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `max_horas` INT NOT NULL,
   PRIMARY KEY (`id`))
