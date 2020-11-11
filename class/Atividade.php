@@ -9,6 +9,7 @@ class Atividade extends AtividadeDao
   private $modo_comprovacao;
   private $maxHoras;
   private $dataRegistro;
+  private $dimensao_id;
 
   public function getTable()
   {
@@ -70,14 +71,26 @@ class Atividade extends AtividadeDao
     $this->dataRegistro = $dataRegistro;
   }
 
+  public function getDimensao_id()
+  {
+    return $this->dimensao_id;
+  }
+
+  public function setDimensao_id($dimensao_id)
+  {
+    $this->dimensao_id = $dimensao_id;
+  }
+
+
   public function insert()
   {
-    $sql = "INSERT INTO $this->table (nome, modo_comprovacao, max_horas)
-            VALUES (:nome, :modo_comprovacao, :maxHoras)";
+    $sql = "INSERT INTO $this->table (nome, modo_comprovacao, max_horas, dimensao_id)
+            VALUES (:nome, :modo_comprovacao, :maxHoras, :dimensao_id)";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('nome', $this->nome);
     $stmt->bindParam('modo_comprovacao', $this->modo_comprovacao);
     $stmt->bindParam('maxHoras', $this->maxHoras);
+    $stmt->bindParam('dimensao_id', $this->dimensao_id);
     return $stmt->execute();
   }
 
@@ -85,12 +98,13 @@ class Atividade extends AtividadeDao
   {
     $sql = "UPDATE $this->table SET nome = :nome,
                                     modo_comprovacao = :modo_comprovacao,
-                                    max_horas = :maxHoras
+                                    max_horas = :maxHoras, dimensao_id = :dimensao_id
                                     WHERE id =:id";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('nome', $this->nome);
     $stmt->bindParam('modo_comprovacao', $this->modo_comprovacao);
     $stmt->bindParam('maxHoras', $this->maxHoras);
+    $stmt->bindParam('dimensao_id', $this->dimensao_id);
     $stmt->bindParam('id', $this->id);
     return $stmt->execute();
   }

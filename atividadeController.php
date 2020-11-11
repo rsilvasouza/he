@@ -9,8 +9,9 @@
 
         try {
            $atividade->setNome($_POST['nome']);
-           $atividade->setDescricao($_POST['descricao']);
+           $atividade->setModo_comprovacao($_POST['modo_comprovacao']);
            $atividade->setMaxHoras($_POST['maxHoras']);
+           $atividade->setDimensao_id($_POST['dimensao_id']);
             # Insert
             if ($atividade->insert()) :
                 $_SESSION['msgSucesso'] = "Atividade cadastrada com sucesso!";
@@ -29,8 +30,9 @@
         try {
             $atividade->setId($_POST['id']);
             $atividade->setNome($_POST['nome']);
-            $atividade->setDescricao($_POST['descricao']);
+            $atividade->setModo_comprovacao($_POST['modo_comprovacao']);
             $atividade->setMaxHoras($_POST['maxHoras']);
+            $atividade->setDimensao_id($_POST['dimensao_id']);
 
             if ($atividade->update()) :
                 $_SESSION['msgSucesso'] = "Atividade editada com sucesso!";
