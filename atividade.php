@@ -34,7 +34,7 @@ $dimensoes = new Dimensao();
                 <td><?php echo $value->nome; ?></td>
                 <td><?php echo $value->modo_comprovacao; ?></td>
                 <td><?php echo $value->max_horas; ?></td>
-                <td><?php echo $value->dimensao_id; ?></td>
+                <td><?php echo $value->dimensao_id;?></td>
                 <td>
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->nome . '\',' . '\'' . $value->modo_comprovacao . '\',' . '\'' . $value->max_horas . '\',' . '\'' . $value->dimensao_id . '\'' ?>)">Editar</button>
                 </td>

@@ -7,6 +7,7 @@ class Dimensao extends DimensaoDao
   private $id;
   private $nome;
   private $max_horas;
+  private $data_registro;
  
   public function getTable()
   {
@@ -46,6 +47,16 @@ class Dimensao extends DimensaoDao
   public function setMax_horas($max_horas)
   {
     $this->max_horas = $max_horas;
+  }
+
+  public function getData_registro()
+  {
+    return $this->data_registro;
+  }
+
+  public function setData_registro($data_registro)
+  {
+    $this->data_registro = $data_registro;
   }
 
   

@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `she`.`dimensao` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `max_horas` INT NOT NULL,
+  `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
@@ -149,10 +150,10 @@ INSERT INTO curso (nome, sigla, data_registro) VALUES ('Gestão Ambiental', 'GA'
 INSERT INTO administrador (matricula, nome, email, senha, data_registro) VALUES ('123456789', 'Administrador', 'administrador@admin.com','e10adc3949ba59abbe56e057f20f883e', DEFAULT); 
 
 --Dados da Tabela Dimensão
-INSERT INTO dimensao(nome, max_horas) VALUES ('ENSINO', 60);
-INSERT INTO dimensao(nome, max_horas) VALUES ('PESQUISA', 60);
-INSERT INTO dimensao(nome, max_horas) VALUES ('EXTENSÃO', 60);
-INSERT INTO dimensao(nome, max_horas) VALUES ('ATIVIDADES EXTRAS', 40);
+INSERT INTO dimensao(nome, max_horas, data_registro) VALUES ('ENSINO', 60, DEFAULT);
+INSERT INTO dimensao(nome, max_horas, data_registro) VALUES ('PESQUISA', 60, DEFAULT);
+INSERT INTO dimensao(nome, max_horas, data_registro) VALUES ('EXTENSÃO', 60, DEFAULT);
+INSERT INTO dimensao(nome, max_horas, data_registro) VALUES ('ATIVIDADES EXTRAS', 40, DEFAULT);
 
 -- Dados da Tabela Atividade
 INSERT INTO atividade (nome, modo_comprovacao, max_horas, data_registro, dimensao_id) VALUES("Disciplinas cursadas além da grade regular do curso", "Secretaria Geral", 50, DEFAULT,1);

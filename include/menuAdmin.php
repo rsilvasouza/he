@@ -39,8 +39,10 @@
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="curso.php">Cursos</a>
                             <a class="nav-link" href="atividade.php">Tipo de Atividades</a>
+                            <a class="nav-link" href="dimensao.php">Dimensões</a>
                         </nav>
                     </div>
+                    
 
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#alunos" aria-expanded="false" aria-controls="alunos">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
