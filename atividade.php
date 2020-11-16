@@ -28,21 +28,20 @@ $dimensoes = new Dimensao();
                 <th></th>
             </tr>
         </thead>
-        <?php foreach ($atividade->findAll() as $key => $value) : ?>
+        <?php foreach ($atividade->listarTipoAtividade() as $key => $value) : ?>
             <tr>
                 <td><?php echo $value->id; ?></td>
                 <td><?php echo $value->nome; ?></td>
                 <td><?php echo $value->modo_comprovacao; ?></td>
                 <td><?php echo $value->max_horas; ?></td>
-                <td><?php echo $value->dimensao_id;?></td>
+                <td><?php echo $value->dimensao;?></td>
                 <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->nome . '\',' . '\'' . $value->modo_comprovacao . '\',' . '\'' . $value->max_horas . '\',' . '\'' . $value->dimensao_id . '\'' ?>)">Editar</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->nome . '\',' . '\'' . $value->modo_comprovacao . '\',' . '\'' . $value->max_horas . '\',' . '\'' . $value->dimensao_id . '\','?>)">Editar</button>
                 </td>
                 <td>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)">Excluir</button>
                 </td>
             </tr>
-
 
 
 
@@ -100,7 +99,7 @@ $dimensoes = new Dimensao();
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Dimensão</label>
-                            <select class="form-control" name="dimensao_id" id="dimensao_id">
+                            <select class="form-control" name="dimensao" id="dimensao">
                                 <option value="">Selecione</option>
                                 <?php foreach ($dimensoes->findAll() as $key => $dimensao) : ?>
                                     <option value="<?php echo $dimensao->id; ?>" <?php echo ($dimensao->id == $value->dimensao_id) ? 'selected' : ''; ?>><?php echo $dimensao->nome; ?></option>
@@ -152,7 +151,7 @@ $dimensoes = new Dimensao();
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Dimensão</label>
-                            <select class="form-control" name="dimensao_id" id="dimensao_id">
+                            <select class="form-control" name="dimensao" id="dimensao">
                                 <option value="">Selecione</option>
                                 <?php foreach ($dimensoes->findAll() as $key => $dimensao) : ?>
                                     <option value="<?php echo $dimensao->id; ?>"><?php echo $dimensao->nome; ?></option>
@@ -187,14 +186,14 @@ $dimensoes = new Dimensao();
         });
     });
 
-    function preencheDados(tipo, id, nome, modo_comprovacao, maxHoras, dimensao_id) {
+    function preencheDados(tipo, id, nome, modo_comprovacao, maxHoras, dimensao) {
 
         if(tipo == 'editar'){
             $('#id').val(id);
             $('#nome').val(nome);
             $('#modo_comprovacao').val(modo_comprovacao);
             $('#maxHoras').val(maxHoras);
-            $('#dimensao_id').val(dimensao_id);
+            $('#dimensao').val(dimensao);
             
         }else if(tipo == 'excluir'){
             $('#idExcluir').val(id);

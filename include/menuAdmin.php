@@ -38,8 +38,8 @@
                     <div class="collapse" id="gerenciar" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="curso.php">Cursos</a>
-                            <a class="nav-link" href="atividade.php">Tipo de Atividades</a>
                             <a class="nav-link" href="dimensao.php">Dimensões</a>
+                            <a class="nav-link" href="atividade.php">Tipo de Atividades</a>
                         </nav>
                     </div>
                     
@@ -63,7 +63,7 @@
                     <div class="collapse" id="atividades" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             <a class="nav-link collapsed" href="atividadeCadastrada.php">
-                                Atividades Cadastradas
+                                Aprovar Atividades
                                 <div class="sb-sidenav-collapse-arrow"></div>
                             </a>
 
