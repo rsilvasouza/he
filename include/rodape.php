@@ -39,7 +39,8 @@
 
 
 <!-- <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="custom/jquery-3.5.1.js"></script>
+<script src="custom/jquery.mask.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>

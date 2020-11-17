@@ -55,7 +55,7 @@ $atividade = new Atividade();
         <?php endforeach; ?>
     </table>
 </div>
-<!-- Modal Excluir -->
+<!-- Modal Aprovar -->
 <div class="modal fade" id="aprovar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -77,7 +77,7 @@ $atividade = new Atividade();
     </div>
 </div>
 
-<!-- Modal Editar -->
+<!-- Modal Excluir -->
 <div class="modal fade" id="rejeitar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

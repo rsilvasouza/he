@@ -11,6 +11,8 @@ class AlunoAtividade extends AlunoAtividadeDao
   private $arquivo;
   private $dataInicial;
   private $dataFinal;
+  private $horaInicial;
+  private $horaFinal;
   private $observacao;
   private $motivo;
   private $alunoId;
@@ -98,6 +100,26 @@ class AlunoAtividade extends AlunoAtividadeDao
     $this->dataFinal = $dataFinal;
   }
 
+  public function getHoraInicial()
+  {
+    return $this->horaInicial;
+  }
+
+  public function setHoraInicial($horaInicial)
+  {
+    $this->horaInicial = $horaInicial;
+  }
+
+  public function getHoraFinal()
+  {
+    return $this->horaFinal;
+  }
+
+  public function setHoraFinal($horaFinal)
+  {
+    $this->horaFinal = $horaFinal;
+  }
+
   public function getObservacao()
   {
     return $this->observacao;
@@ -160,14 +182,17 @@ class AlunoAtividade extends AlunoAtividadeDao
 
   public function insert()
   {
-    $sql = "INSERT INTO $this->table (descricao, atividade_id, carga_horaria, arquivo, data_inicial, data_final, aluno_id)
+    $sql = "INSERT INTO $this->table (descricao, atividade_id, carga_horaria, arquivo, data_inicial, data_final, aluno_id, observacao, hora_inicial, hora_final)
             VALUES (:descricao,
                     :atividadeId,
                     :cargaHoraria,
                     :arquivo,
                     :dataInicial,
                     :dataFinal,
-                    :alunoId)";
+                    :alunoId,
+                    :observacao,
+                    :horaInicial,
+                    :horaFinal)";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('descricao', $this->descricao);
     $stmt->bindParam('atividadeId', $this->atividadeId);
@@ -176,6 +201,9 @@ class AlunoAtividade extends AlunoAtividadeDao
     $stmt->bindParam('dataInicial', $this->dataInicial);
     $stmt->bindParam('dataFinal', $this->dataFinal);
     $stmt->bindParam('alunoId', $this->alunoId);
+    $stmt->bindParam('observacao', $this->observacao);
+    $stmt->bindParam('HoraInicial', $this->horaInicial);
+    $stmt->bindParam('HoraFinal', $this->horaFinal);
     return $stmt->execute();
   }
 
@@ -207,10 +235,10 @@ class AlunoAtividade extends AlunoAtividadeDao
     $sql = "UPDATE $this->table SET descricao = :descricao,
                                     atividade_id = :atividadeId,
                                     carga_horaria = :cargaHoraria,
-                                    arquivo = :arquivo,
                                     data_inicial = :dataInicial,
-                                    data_final = :dataFinal
-                                    WHERE id =:id";
+                                    data_final = :dataFinal,
+                                    aluno_id = :alunoId
+                                    WHERE id = :id";
     $stmt = DB::prepare($sql);
     $stmt->bindParam('descricao', $this->descricao);
     $stmt->bindParam('atividadeId', $this->atividadeId);
