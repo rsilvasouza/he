@@ -101,6 +101,7 @@
     } else if (isset($_POST['editar'])) {
 
         try {
+            $alunoAtividade->setId($_POST['id']);
             $alunoAtividade->setDescricao($_POST['descricao']);
             $alunoAtividade->setAtividadeId($_POST['atividade']);
             $alunoAtividade->setCargaHoraria($_POST['cargaHoraria']);

@@ -28,7 +28,7 @@ $atividades = new Atividade();
                 <th></th>
             </tr>
         </thead>
-        <?php foreach ($alunoAtividade->findAtividadesCadastradas($_SESSION['idAluno']) as $key => $value) : 
+        <?php foreach ($alunoAtividade->findAtividadesCadastradas($_SESSION['idAluno']) as $key => $value) :
             $periodo = ($value->data_inicial == $value->data_final) ? date("d/m/Y", strtotime($value->data_inicial)) : date("d/m/Y", strtotime($value->data_inicial)) . " - " . date("d/m/Y", strtotime($value->data_final));
             $motivo = ($value->motivo == NULL) ? '' : " - " . $value->motivo;
         ?>
@@ -44,7 +44,7 @@ $atividades = new Atividade();
                     </a>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->atividade_id . '\',' . '\'' . $value->data_inicial . '\',' . '\'' . $value->data_final . '\',' . '\'' . $value->carga_horaria . '\',' . '\'' . $value->arquivo . '\','?>)">Editar</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->atividade_id . '\',' . '\'' . $value->data_inicial . '\',' . '\'' . $value->data_final . '\',' . '\'' . $value->carga_horaria . '\',' . '\'' . $value->arquivo . '\',' ?>)">Editar</button>
                 </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)">Excluir</button>
@@ -92,7 +92,7 @@ $atividades = new Atividade();
 
             <form enctype="multipart/form-data" method="post" action="alunoAtividadeController.php">
                 <div class="modal-body text-left">
-                    <input type="hidden" value="<?php echo $value->id; ?>" name="id" id="id">
+                    <input type="text" name="id" id="id">
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Nome da Atividade</label>
@@ -191,6 +191,19 @@ $atividades = new Atividade();
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
+                            <label>Horário da Atividade</label>
+                            <input type="text" name="horaInicial" id="horaInicial" onblur="formataHora('horaFinal')" class="form-control" aria-describedby="helpId">
+                            <small id="emailHelp" class="form-text text-muted">Período ou hora da atividade.</small>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>&nbsp;</label>
+                            <input type="text" name="horaFinal" id="horaFinal"  class="form-control" aria-describedby="helpId">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label>Carga Horária</label>
                             <input type="time" name="cargaHoraria" id="cargaHoraria" class="form-control" aria-describedby="helpId">
                         </div>
@@ -232,6 +245,8 @@ $atividades = new Atividade();
             $('#idExcluir').val(id);
         }
     }
+
+    
 
     // function validaPeriodo(dataInicial, dataFinal){
     //     if(dataFinal < dataInicial){

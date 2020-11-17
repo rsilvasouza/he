@@ -8,3 +8,10 @@ function validarSenha(){
       document.getElementById("editar").disabled = false;
     }
  }
+
+ function formataHora(hora){
+   alert("To aqui");
+  $(document).ready(function() {
+    $("#horaInicial").mask("99:99");
+});
+ }

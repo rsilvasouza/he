@@ -92,17 +92,16 @@ CREATE TABLE IF NOT EXISTS `she`.`dimensao` (
 -- Table `she`.`atividade`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `she`.`atividade` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `modo_comprovacao` VARCHAR(255) NULL DEFAULT NULL,
   `max_horas` INT NOT NULL,
   `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `dimensao_id` INT NOT NULL,
-  PRIMARY KEY (`id`)),
   -- INDEX `fk_atividade_dimensao1_idx` (`dimensao_id` ASC) VISIBLE,
   CONSTRAINT `fk_atividade_dimensao1`
     FOREIGN KEY (`dimensao_id`)
-    REFERENCES `she`.`dimensao` (`id`)
+    REFERENCES `she`.`dimensao` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -118,6 +117,8 @@ CREATE TABLE IF NOT EXISTS `she`.`aluno_atividade` (
   `arquivo` VARCHAR(255) NOT NULL,
   `data_inicial` DATE NOT NULL,
   `data_final` DATE NOT NULL,
+  `hora_inicial` TIME NULL,
+  `hora_final` TIME NULL,
   `observacao` VARCHAR(1000) NULL,
   `motivo` VARCHAR(255) NULL,
   `aluno_id` INT NOT NULL,
@@ -149,7 +150,7 @@ INSERT INTO curso (nome, sigla, data_registro) VALUES ('Gestão Ambiental', 'GA'
 -- Dados da Tabela Administrador
 INSERT INTO administrador (matricula, nome, email, senha, data_registro) VALUES ('123456789', 'Administrador', 'administrador@admin.com','e10adc3949ba59abbe56e057f20f883e', DEFAULT); 
 
---Dados da Tabela Dimensão
+-- Dados da Tabela Dimensão
 INSERT INTO dimensao(nome, max_horas, data_registro) VALUES ('ENSINO', 60, DEFAULT);
 INSERT INTO dimensao(nome, max_horas, data_registro) VALUES ('PESQUISA', 60, DEFAULT);
 INSERT INTO dimensao(nome, max_horas, data_registro) VALUES ('EXTENSÃO', 60, DEFAULT);
