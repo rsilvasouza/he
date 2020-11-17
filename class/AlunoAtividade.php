@@ -202,8 +202,8 @@ class AlunoAtividade extends AlunoAtividadeDao
     $stmt->bindParam('dataFinal', $this->dataFinal);
     $stmt->bindParam('alunoId', $this->alunoId);
     $stmt->bindParam('observacao', $this->observacao);
-    $stmt->bindParam('HoraInicial', $this->horaInicial);
-    $stmt->bindParam('HoraFinal', $this->horaFinal);
+    $stmt->bindParam('horaInicial', $this->horaInicial);
+    $stmt->bindParam('horaFinal', $this->horaFinal);
     return $stmt->execute();
   }
 
@@ -215,6 +215,9 @@ class AlunoAtividade extends AlunoAtividadeDao
                                     arquivo = :arquivo,
                                     data_inicial = :dataInicial,
                                     data_final = :dataFinal,
+                                    hora_inicial = :horaInicial,
+                                    hora_final = :horaFinal,
+                                    observacao = :observacao,
                                     aluno_id = :alunoId
                                     WHERE id =:id";
     $stmt = DB::prepare($sql);
@@ -224,6 +227,9 @@ class AlunoAtividade extends AlunoAtividadeDao
     $stmt->bindParam('arquivo', $this->arquivo);
     $stmt->bindParam('dataInicial', $this->dataInicial);
     $stmt->bindParam('dataFinal', $this->dataFinal);
+    $stmt->bindParam('horaInicial', $this->horaInicial);
+    $stmt->bindParam('horaFinal', $this->horaFinal);
+    $stmt->bindParam('observacao', $this->observacao);
     $stmt->bindParam('alunoId', $this->alunoId);
     $stmt->bindParam('id', $this->id);
                 
@@ -237,6 +243,9 @@ class AlunoAtividade extends AlunoAtividadeDao
                                     carga_horaria = :cargaHoraria,
                                     data_inicial = :dataInicial,
                                     data_final = :dataFinal,
+                                    hora_inicial = :horaInicial,
+                                    hora_final = :horaFinal,
+                                    observacao = :observacao,
                                     aluno_id = :alunoId
                                     WHERE id = :id";
     $stmt = DB::prepare($sql);
@@ -245,6 +254,9 @@ class AlunoAtividade extends AlunoAtividadeDao
     $stmt->bindParam('cargaHoraria', $this->cargaHoraria);
     $stmt->bindParam('dataInicial', $this->dataInicial);
     $stmt->bindParam('dataFinal', $this->dataFinal);
+    $stmt->bindParam('horaInicial', $this->horaInicial);
+    $stmt->bindParam('horaFinal', $this->horaFinal);
+    $stmt->bindParam('observacao', $this->observacao);
     $stmt->bindParam('alunoId', $this->alunoId);
     $stmt->bindParam('id', $this->id);
                 

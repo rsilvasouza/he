@@ -14,7 +14,10 @@
             $alunoAtividade->setCargaHoraria($_POST['cargaHoraria']);
             $alunoAtividade->setDataInicial($_POST['dataInicial']);
             $alunoAtividade->setDataFinal((empty($_POST['dataFinal']) ? $_POST['dataInicial'] : $_POST['dataFinal']));
+            $alunoAtividade->setHoraInicial($_POST['horaInicial']);
+            $alunoAtividade->setHoraFinal($_POST['horaFinal']);
             $alunoAtividade->setAlunoId($_SESSION['idAluno']);
+            $alunoAtividade->setObservacao($_POST['observacao']);
 
             if (!empty($_FILES['arquivo']['name'])) {
                 $formatosPermitidos = array("png", "jpeg", "jpg", "pdf");
@@ -108,6 +111,9 @@
             $alunoAtividade->setDataInicial($_POST['dataInicial']);
             $alunoAtividade->setDataFinal((empty($_POST['dataFinal']) ? $_POST['dataInicial'] : $_POST['dataFinal']));
             $alunoAtividade->setAlunoId($_SESSION['idAluno']);
+            $alunoAtividade->setHoraInicial($_POST['horaInicial']);
+            $alunoAtividade->setHoraFinal($_POST['horaFinal']);
+            $alunoAtividade->setObservacao($_POST['observacao']);
 
             if (!empty($_FILES['arquivo']['name'])) {
                 $formatosPermitidos = array("png", "jpeg", "jpg", "pdf");
@@ -151,6 +157,23 @@
                     exit();
                 endif;
             }
+        } catch (Exception $ex) {
+            Erro::trataErro($ex);
+        }
+    } else if (isset($_POST['excluir']) && $_POST['idExcluir'] != 0) {
+
+        try {
+            $id = $_POST['idExcluir'];
+
+            if ($alunoAtividade->delete($id)) :
+                $_SESSION['msgSucesso'] = "Atividade excluida com sucesso!";
+                header("location: alunoAtividade.php");
+                exit();
+            else :
+                $_SESSION['msgErro'] = "Ocorreu um erro durante a exclusão do registo, por favor tente novamente";
+                header("location: alunoAtividade.php");
+                exit();
+            endif;
         } catch (Exception $ex) {
             Erro::trataErro($ex);
         }

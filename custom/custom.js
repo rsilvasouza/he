@@ -9,9 +9,11 @@ function validarSenha(){
     }
  }
 
- function formataHora(hora){
-   alert("To aqui");
+ function formataHora(){
+   //alert("To aqui");
   $(document).ready(function() {
+    $("#cargaHoraria").mask("99:99");
     $("#horaInicial").mask("99:99");
+    $("#horaFinal").mask("99:99");
 });
  }

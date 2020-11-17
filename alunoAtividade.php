@@ -44,7 +44,7 @@ $atividades = new Atividade();
                     </a>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->atividade_id . '\',' . '\'' . $value->data_inicial . '\',' . '\'' . $value->data_final . '\',' . '\'' . $value->carga_horaria . '\',' . '\'' . $value->arquivo . '\',' ?>)">Editar</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->atividade_id . '\',' . '\'' . $value->data_inicial . '\',' . '\'' . $value->data_final . '\',' . '\'' . $value->hora_inicial . '\',' . '\'' . $value->hora_final . '\',' . '\'' . $value->carga_horaria . '\',' . '\'' . $value->observacao . '\'' ?>)">Editar</button>
                 </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)">Excluir</button>
@@ -67,7 +67,7 @@ $atividades = new Atividade();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="">
+            <form method="post" action="alunoAtividadeController.php">
                 <input type="hidden" name="idExcluir" id="idExcluir">
 
                 <div class="modal-footer">
@@ -92,7 +92,7 @@ $atividades = new Atividade();
 
             <form enctype="multipart/form-data" method="post" action="alunoAtividadeController.php">
                 <div class="modal-body text-left">
-                    <input type="text" name="id" id="id">
+                    <input type="hidden" name="id" id="id">
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Nome da Atividade</label>
@@ -126,13 +126,32 @@ $atividades = new Atividade();
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
+                            <label>Horário da Atividade</label>
+                            <input type="text" name="horaInicial" id="horaInicial" onfocus="formataHora()" class="form-control" aria-describedby="helpId">
+                            <small id="emailHelp" class="form-text text-muted">Período ou hora da atividade.</small>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>&nbsp;</label>
+                            <input type="text" name="horaFinal" id="horaFinal" onfocus="formataHora()" class="form-control" aria-describedby="helpId">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label>Carga Horária</label>
-                            <input type="time" name="cargaHoraria" id="cargaHoraria" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="cargaHoraria" id="cargaHoraria" onfocus="formataHora()" class="form-control" aria-describedby="helpId">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label>Anexar Arquivo</label>
                             <input type="file" name="arquivo" id="arquivo" class="form-control-file" aria-describedby="helpId">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Observação</label>
+                            <input type="text" name="observacao" id="observacao" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
                 </div>
@@ -192,25 +211,32 @@ $atividades = new Atividade();
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Horário da Atividade</label>
-                            <input type="text" name="horaInicial" id="horaInicial" onblur="formataHora('horaFinal')" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="horaInicial" id="horaInicial" onfocus="formataHora()" class="form-control" aria-describedby="helpId">
                             <small id="emailHelp" class="form-text text-muted">Período ou hora da atividade.</small>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label>&nbsp;</label>
-                            <input type="text" name="horaFinal" id="horaFinal"  class="form-control" aria-describedby="helpId">
+                            <input type="text" name="horaFinal" id="horaFinal" onfocus="formataHora()" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Carga Horária</label>
-                            <input type="time" name="cargaHoraria" id="cargaHoraria" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="cargaHoraria" id="cargaHoraria" onfocus="formataHora()" class="form-control" aria-describedby="helpId">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label>Anexar Arquivo</label>
                             <input type="file" name="arquivo" id="arquivo" class="form-control-file" aria-describedby="helpId">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Observação</label>
+                            <input type="text" name="observacao" id="observacao" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
                 </div>
@@ -233,20 +259,23 @@ $atividades = new Atividade();
         });
     });
 
-    function preencheDados(tipo, id, descricao, atividade, dataInicial, dataFinal, cargaHoraria) {
+    function preencheDados(tipo, id, descricao, atividade, dataInicial, dataFinal, horaInicial, horaFinal, cargaHoraria, observacao) {
         if (tipo == 'editar') {
             $('#id').val(id);
             $('#descricao').val(descricao);
             $('#atividade').val(atividade);
             $('#dataInicial').val(dataInicial);
             $('#dataFinal').val(dataFinal);
+            $('#horaInicial').val(horaInicial);
+            $('#horaFinal').val(horaFinal);
             $('#cargaHoraria').val(cargaHoraria);
+            $('#observacao').val(observacao);
         } else if (tipo == 'excluir') {
             $('#idExcluir').val(id);
         }
     }
 
-    
+
 
     // function validaPeriodo(dataInicial, dataFinal){
     //     if(dataFinal < dataInicial){
