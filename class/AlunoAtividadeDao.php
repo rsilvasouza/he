@@ -65,6 +65,17 @@ abstract class AlunoAtividadeDao extends DB
         return $stmt->fetchAll();
     }
 
+    public function ListarChart(){
+        $sql = "SELECT d.nome AS nome, COUNT(d.nome) AS quantidade 
+        FROM atividade a 
+        INNER JOIN dimensao d ON a.dimensao_id = d.id 
+        INNER JOIN $this->table alt ON alt.atividade_id = a.id WHERE alt.status = 1 GROUP BY d.nome
+        HAVING COUNT(d.nome) > 0 ORDER BY d.id";
+        $stmt = DB::prepare($sql);
+        $stmt->execute();
+        return $array=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function aprovar($id, $status)
   {
     $sql = "UPDATE $this->table SET status = :status
