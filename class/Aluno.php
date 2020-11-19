@@ -53,7 +53,7 @@ class Aluno extends AlunoDao
 
   public function setNome($nome)
   {
-    $this->nome = $nome;
+    $this->nome = strtoupper($nome);
   }
 
   public function getEmail()

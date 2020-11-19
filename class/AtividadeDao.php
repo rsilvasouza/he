@@ -31,4 +31,8 @@ abstract class AtividadeDao extends DB
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function listarAtividade() {
+        
+    }
 }

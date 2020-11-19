@@ -87,6 +87,20 @@ abstract class AlunoAtividadeDao extends DB
     return $stmt->execute();
   }
 
+  public function somarCargaHorariaPorTipo($atividadeId, $alunoId){
+      
+    $sql = "SELECT time_format( SEC_TO_TIME( SUM( TIME_TO_SEC( aa.carga_horaria ) ) ),'%H:%i') as soma
+            FROM $this->table aa
+            where atividade_id = :atividadeId
+            AND aluno_id = :alunoId
+            AND status = 1";
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam(':atividadeId', $atividadeId, PDO::PARAM_INT);
+    $stmt->bindParam(':alunoId', $alunoId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
     public function delete($id)
     {
         $sql = "DELETE FROM $this->table WHERE id = :id";

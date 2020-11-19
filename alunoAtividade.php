@@ -31,6 +31,15 @@ $atividades = new Atividade();
         <?php foreach ($alunoAtividade->findAtividadesCadastradas($_SESSION['idAluno']) as $key => $value) :
             $periodo = ($value->data_inicial == $value->data_final) ? date("d/m/Y", strtotime($value->data_inicial)) : date("d/m/Y", strtotime($value->data_inicial)) . " - " . date("d/m/Y", strtotime($value->data_final));
             $motivo = ($value->motivo == NULL) ? '' : " - " . $value->motivo;
+            if(empty($value->arquivo)){
+                $arquivo =  "<button class='btn btn-default'>
+                                <i class='fas fa-upload'></i> Upload
+                            </button>";
+            }else{
+                $arquivo =  "<a class='btn btn-info' href='arquivos/{$value->arquivo}' download='{$value->descricao}'>
+                                <i class='fas fa-cloud-download-alt'></i> Download
+                            </a>";
+            }
         ?>
             <tr>
                 <td><?php echo $value->descricao; ?></td>
@@ -39,9 +48,7 @@ $atividades = new Atividade();
                 <td class="text-center"><?php echo $value->carga_horaria; ?></td>
                 <td class="text-center"><?php echo $alunoAtividade->situacao($value->status) . $motivo; ?></td>
                 <td class="text-center">
-                    <a class="btn btn-info" href="arquivos/<?php echo $value->arquivo; ?>" download="<?php echo $value->descricao; ?>">
-                        <i class="fas fa-cloud-download-alt"></i> Download
-                    </a>
+                    <?php echo $arquivo; ?>
                 </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->atividade_id . '\',' . '\'' . $value->data_inicial . '\',' . '\'' . $value->data_final . '\',' . '\'' . $value->hora_inicial . '\',' . '\'' . $value->hora_final . '\',' . '\'' . $value->carga_horaria . '\',' . '\'' . $value->observacao . '\'' ?>)">Editar</button>
@@ -211,20 +218,20 @@ $atividades = new Atividade();
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Horário da Atividade</label>
-                            <input type="text" name="horaInicial" id="horaInicial" onfocus="formataHora()" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="horaInicial" id="horaInicial2" class="form-control" aria-describedby="helpId">
                             <small id="emailHelp" class="form-text text-muted">Período ou hora da atividade.</small>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label>&nbsp;</label>
-                            <input type="text" name="horaFinal" id="horaFinal" onfocus="formataHora()" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="horaFinal" id="horaFinal2" class="form-control" aria-describedby="helpId">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Carga Horária</label>
-                            <input type="text" name="cargaHoraria" id="cargaHoraria" onfocus="formataHora()" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="cargaHoraria" id="cargaHoraria2" class="form-control" aria-describedby="helpId">
                         </div>
 
                         <div class="form-group col-md-6">
