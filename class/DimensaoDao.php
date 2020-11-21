@@ -16,6 +16,15 @@ abstract class DimensaoDao extends DB
         return $stmt->fetchAll();
     }
 
+    public function buscaHoraMaxDimensao($id) {
+        $sql = "SELECT max_horas FROM $this->table WHERE id = :id";
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll();
+        return $resultado[0]->max_horas;
+    }
+
     public function delete($id)
     {
         $sql = "DELETE FROM $this->table WHERE id = :id";

@@ -87,6 +87,16 @@ if ($_SESSION['status'] != 'logado') {
                             </button>
                           </div>";
                     unset($_SESSION["msgInfo"]);
+                
+                elseif (isset($_SESSION["msgWarning"])) :
+                    $msgInfo = $_SESSION["msgWarning"];
+                    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                            $msgInfo
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                            </button>
+                          </div>";
+                    unset($_SESSION["msgWarning"]);
                 endif;
 
                 ?>

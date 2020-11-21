@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  
+  $("#cargaHoraria").mask("99:99");
+  $("#horaInicial").mask("99:99");
+  $("#horaFinal").mask("99:99");
   $("#cargaHoraria2").mask("99:99");
   $("#horaInicial2").mask("99:99");
   $("#horaFinal2").mask("99:99");

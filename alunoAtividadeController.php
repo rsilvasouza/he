@@ -3,7 +3,7 @@
     require_once 'classes.php';
 
     $alunoAtividade = new AlunoAtividade();
-    
+
     if (isset($_POST['cadastrar'])) {
 
         $alunoAtividade->setDescricao($_POST['descricao']);
@@ -162,21 +162,42 @@
     }
 
 
-    function cadastraAlunoAtividade($alunoAtividade) {
-        
+    function cadastraAlunoAtividade($alunoAtividade)
+    {
+
         $atividade = new Atividade();
+        $dimensao = new Dimensao();
+
+        //Validação por dimensão
+        $idDimensao = $atividade->buscaIdDimensao($alunoAtividade->getAtividadeId());
+        $somaHorasTipoAtividade = $alunoAtividade->somarCargaHorariaPorTipoAtividade($alunoAtividade->getAlunoId(), $idDimensao);
+        $horaMaxDimensao = $dimensao->buscaHoraMaxDimensao($idDimensao);
+
+        //Validação horas por tipo
         $somaAtividade = $alunoAtividade->somarCargaHorariaPorTipo($alunoAtividade->getAtividadeId(), $alunoAtividade->getAlunoId());
-        $horaMaxAtividade = $atividade->listarAtividade();
-        
-        if ($somaAtividade <= 40) {
-            if ($alunoAtividade->insert()) {
-                $_SESSION['msgSucesso'] = "Atividade cadastrada com sucesso!";
-                header("location: alunoAtividade.php");
-                exit();
+        $horaMaxAtividade = $atividade->listarAtividade($alunoAtividade->getAtividadeId());
+
+
+        if ($somaAtividade < $horaMaxAtividade) {
+            if ($somaHorasTipoAtividade < $horaMaxDimensao) {
+                if ($alunoAtividade->insert()) {
+                    $_SESSION['msgSucesso'] = "Atividade cadastrada com sucesso!";
+                    header("location: alunoAtividade.php");
+                    exit();
+                } else {
+                    $_SESSION['msgErro'] = "Ocorreu um erro durante salvar o registo, por favor tente novamente";
+                    header("location: alunoAtividade.php");
+                    exit();
+                }
             } else {
-                $_SESSION['msgErro'] = "Ocorreu um erro durante salvar o registo, por favor tente novamente";
+
+                $_SESSION['msgWarning'] = "O <strong>tipo de Atividade</strong> informado já atingiu o limite de horas previstas na <strong>Dimensão</strong>!";
                 header("location: alunoAtividade.php");
                 exit();
             }
+        } else {
+            $_SESSION['msgWarning'] = "O <strong>tipo de Atividade</strong> informado já atingiu o limite de horas previstas!";
+            header("location: alunoAtividade.php");
+            exit();
         }
     }
