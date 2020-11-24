@@ -261,7 +261,7 @@ $atividades = new Atividade();
 <script>
     $(document).ready(function() {
         $('#listar').dataTable({
-            searching: false,
+            searching: true,
             responsive: true
         });
     });
