@@ -18,7 +18,7 @@ if (isset($_POST['cadastrar'])) {
 
         if (!$aluno->findMatricula($_POST['matricula']) && !$aluno->findEmail($_POST['email'])) :
             $aluno->insert();
-            $_SESSION['msgSucesso'] = "Registro cadastrado com sucesso. Aguardando aprovação!";
+            $_SESSION['msgSucesso'] = "Registro cadastrado com sucesso. <strong>Aguarde aprovação!</strong>";
             header("location: login.php");
             exit();
         else :
@@ -75,6 +75,25 @@ if (isset($_POST['editar'])) {
                 header("location: aluno.php");
             }
         }
+    } catch (Exception $ex) {
+        Erro::trataErro($ex);
+    }
+} else if (isset($_POST['rejeitar']) && $_POST['idRejeitar'] != 0) {
+
+    try {
+        $id = $_POST['idRejeitar'];
+        $motivo = $_POST['motivo'];
+        $status = 0;
+
+        if ($aluno->rejeitar($id, $motivo, $status)) :
+            $_SESSION['msgSucesso'] = "Cadastro <b>Rejeitado</b> com sucesso!";
+            header("location: alunoCadastrado.php");
+            exit();
+        else :
+            $_SESSION['msgErro'] = "Ocorreu um erro durante a rejeição do registo, por favor tente novamente";
+            header("location: alunoCadastrado.php");
+            exit();
+        endif;
     } catch (Exception $ex) {
         Erro::trataErro($ex);
     }

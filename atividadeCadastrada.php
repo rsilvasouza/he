@@ -28,6 +28,15 @@ $atividade = new Atividade();
         </thead>
         <?php foreach ($alunoAtividade->listarAtividadeCadastrada() as $key => $value) : 
             $periodo = ($value->data_inicial == $value->data_final) ? date("d/m/Y", strtotime($value->data_inicial)) : date("d/m/Y", strtotime($value->data_inicial)) . " - " . date("d/m/Y", strtotime($value->data_final));
+            if(empty($value->arquivo)){
+                $arquivo =  "<button class='btn btn-secondary' {$disable}>
+                                <i class='fas fa-exclamation-triangle'></i>
+                            </button>";
+            }else{
+                $arquivo =  "<a class='btn btn-info' href='arquivos/{$value->arquivo}' download='{$value->descricao}' {$disable}>
+                                <i class='fas fa-cloud-download-alt'></i>
+                            </a>";
+            }
         ?>
             <tr>
                 <td><?php echo $value->matricula; ?></td>
@@ -37,9 +46,7 @@ $atividade = new Atividade();
                 <td class="text-center"><?php echo $periodo; ?> </td>
                 <td class="text-center"><?php echo $value->carga_horaria; ?></td>
                 <td class="text-center">
-                    <a class="btn btn-info" href="arquivos/<?php echo $value->arquivo; ?>" download="<?php echo $value->descricao; ?>">
-                        <i class="fas fa-cloud-download-alt"></i> Download
-                    </a>
+                    <?php echo $arquivo; ?>
                 </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aprovar" onclick="preencheDados('aprovar', <?php echo '\'' . $value->id . '\''?>)">Aprovar</button>
@@ -77,7 +84,7 @@ $atividade = new Atividade();
     </div>
 </div>
 
-<!-- Modal Excluir -->
+<!-- Modal Rejeitar -->
 <div class="modal fade" id="rejeitar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

@@ -57,7 +57,7 @@ class AlunoAtividade extends AlunoAtividadeDao
 
   public function setCargaHoraria($cargaHoraria)
   {
-    $this->cargaHoraria = $cargaHoraria;
+    $this->cargaHoraria = (empty($cargaHoraria) ? '00:00' : $cargaHoraria);
   }
 
   public function getStatus()
@@ -87,7 +87,7 @@ class AlunoAtividade extends AlunoAtividadeDao
 
   public function setDataInicial($dataInicial)
   {
-    $this->dataInicial = $dataInicial;
+    $this->dataInicial = (empty($dataInicial) ? date('Y-m-d') : $dataInicial);
   }
 
   public function getDataFinal()
@@ -97,7 +97,7 @@ class AlunoAtividade extends AlunoAtividadeDao
 
   public function setDataFinal($dataFinal)
   {
-    $this->dataFinal = $dataFinal;
+    $this->dataFinal = (empty($dataFinal) ? $this->dataInicial : $dataFinal);
   }
 
   public function getHoraInicial()
@@ -107,7 +107,8 @@ class AlunoAtividade extends AlunoAtividadeDao
 
   public function setHoraInicial($horaInicial)
   {
-    $this->horaInicial = $horaInicial;
+    
+    $this->horaInicial = (empty($horaInicial) ? '00:00' : $horaInicial);
   }
 
   public function getHoraFinal()
@@ -117,7 +118,7 @@ class AlunoAtividade extends AlunoAtividadeDao
 
   public function setHoraFinal($horaFinal)
   {
-    $this->horaFinal = $horaFinal;
+    $this->horaFinal = (empty($horaFinal) ? '00:00' : $horaFinal);
   }
 
   public function getObservacao()

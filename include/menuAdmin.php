@@ -9,7 +9,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">Editar</a>
+                <a class="dropdown-item" href="administradorEditar.php">Editar</a>
                 <div class="dropdown-divider"></div>
                 <form action="loginController.php" method="post">
                     <button class="dropdown-item" name="logout" type="submit">Logout</button>
@@ -24,11 +24,10 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading"></div>
-                    <!-- <a class="nav-link" href="index.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a> -->
-
+                    <a class="nav-link" href="administradorEditar.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                        Editar Cadastro
+                    </a>
                     <div class="sb-sidenav-menu-heading">Administração</div>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gerenciar" aria-expanded="false" aria-controls="gerenciar">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -42,7 +41,7 @@
                             <a class="nav-link" href="atividade.php">Tipo de Atividades</a>
                         </nav>
                     </div>
-                    
+
 
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#alunos" aria-expanded="false" aria-controls="alunos">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>

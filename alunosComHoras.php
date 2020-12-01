@@ -25,6 +25,15 @@ $aluno = new Aluno();
             </tr>
         </thead>
         <?php foreach ($aluno->listarAlunosComAtividade() as $key => $value) :
+        if(empty($value->arquivo)){
+            $arquivo =  "<button class='btn btn-secondary' {$disable}>
+            <i class='fas fa-exclamation-triangle'></i>
+        </button>";
+        }else{
+            $arquivo =  "<a class='btn btn-info' href='arquivos/{$value->arquivo}' download='{$value->descricao}' {$disable}>
+                            <i class='fas fa-cloud-download-alt'></i>
+                        </a>";
+        }
 
         ?>
             <tr>
@@ -35,9 +44,7 @@ $aluno = new Aluno();
                 <td><?php echo substr($value->carga_horaria,0,5) . 'h'; ?></td>
                 <td><?php echo $alunoAtividade->situacao($value->status); ?></td>
                 <td class="text-center">
-                    <a class="btn btn-info" href="arquivos/<?php echo $value->arquivo; ?>" download="<?php echo $value->descricao; ?>">
-                        <i class="fas fa-cloud-download-alt"></i> Download
-                    </a>
+                    <?php echo $arquivo; ?>
                 </td>
 
             </tr>

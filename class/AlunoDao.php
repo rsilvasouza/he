@@ -48,14 +48,29 @@ abstract class AlunoDao extends DB
         return $stmt->fetchAll();
     }
 
-    public function verificaStatus($email)
-    {
-
-        $sql = "select * from $this->table WHERE email = ? AND status IS NULL";
-
-        $params = array("$email");
+    public function verificaStatus($email, $senha) {
+        
+        $sql = "select * from $this->table WHERE email = :email AND senha = :senha AND status IS NULL";
         $stmt = DB::prepare($sql);
-        $stmt->execute($params);
+        $stmt->bindParam('email', $email);
+        $stmt->bindParam('senha', $senha);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (count($resultado) <= 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function verificaRejeitado($email, $senha, $status) {
+        
+        $sql = "select * from $this->table WHERE email = :email AND senha = :senha AND status = :status";
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam('email', $email);
+        $stmt->bindParam('senha', $senha);
+        $stmt->bindParam('status', $senha);
+        $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($resultado) <= 0) {
             return false;
@@ -104,7 +119,7 @@ abstract class AlunoDao extends DB
 
     public function listarAlunosComAtividade()
     {
-        $sql = "SELECT a.matricula, a.nome AS aluno, c.sigla AS curso, a.turno, at.nome AS atividade, aa.carga_horaria, aa.status, aa.arquivo FROM $this->table a 
+        $sql = "SELECT aa.descricao, a.matricula, a.nome AS aluno, c.sigla AS curso, a.turno, at.nome AS atividade, aa.carga_horaria, aa.status, aa.arquivo FROM $this->table a 
                 INNER JOIN curso c ON c.id = a.curso_id 
                 INNER JOIN aluno_atividade aa ON aa.aluno_id = a.id
                 INNER JOIN atividade at ON at.id = aa.atividade_id";
@@ -125,6 +140,17 @@ abstract class AlunoDao extends DB
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function rejeitar($id, $motivo, $status) {
+    $sql = "UPDATE $this->table SET info_cadastro = :motivo,
+                                    status = :status
+                                    WHERE id = :id";
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam('motivo', $motivo);
+    $stmt->bindParam('status', $status);
+    $stmt->bindParam('id', $id, PDO::PARAM_INT);
+    return $stmt->execute();
+  }
 
     public function delete($id)
     {
