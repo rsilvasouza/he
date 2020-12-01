@@ -31,15 +31,19 @@ $atividades = new Atividade();
         <?php foreach ($alunoAtividade->findAtividadesCadastradas($_SESSION['idAluno']) as $key => $value) :
             $periodo = ($value->data_inicial == $value->data_final) ? date("d/m/Y", strtotime($value->data_inicial)) : date("d/m/Y", strtotime($value->data_inicial)) . " - " . date("d/m/Y", strtotime($value->data_final));
             $motivo = ($value->motivo == NULL) ? '' : " - " . $value->motivo;
+            $disable = ($value->status == -1)? '' : 'disabled';
+
             if(empty($value->arquivo)){
-                $arquivo =  "<button class='btn btn-default'>
-                                <i class='fas fa-upload'></i> Upload
-                            </button>";
+                $arquivo =  "<button class='btn btn-secondary' {$disable}>
+                <i class='fas fa-exclamation-triangle'></i>
+            </button>";
             }else{
-                $arquivo =  "<a class='btn btn-info' href='arquivos/{$value->arquivo}' download='{$value->descricao}'>
-                                <i class='fas fa-cloud-download-alt'></i> Download
+                $arquivo =  "<a class='btn btn-info' href='arquivos/{$value->arquivo}' download='{$value->descricao}' {$disable}>
+                                <i class='fas fa-cloud-download-alt'></i>
                             </a>";
             }
+
+            
         ?>
             <tr>
                 <td><?php echo $value->descricao; ?></td>
@@ -51,10 +55,10 @@ $atividades = new Atividade();
                     <?php echo $arquivo; ?>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->atividade_id . '\',' . '\'' . $value->data_inicial . '\',' . '\'' . $value->data_final . '\',' . '\'' . $value->hora_inicial . '\',' . '\'' . $value->hora_final . '\',' . '\'' . $value->carga_horaria . '\',' . '\'' . $value->observacao . '\'' ?>)">Editar</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar" onclick="preencheDados('editar', <?php echo '\'' . $value->id . '\',' . '\'' . $value->descricao . '\',' . '\'' . $value->atividade_id . '\',' . '\'' . $value->data_inicial . '\',' . '\'' . $value->data_final . '\',' . '\'' . $value->hora_inicial . '\',' . '\'' . $value->hora_final . '\',' . '\'' . $value->carga_horaria . '\',' . '\'' . $value->observacao . '\'' ?>)" <?php echo $disable; ?>>Editar</button>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)">Excluir</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir" onclick="preencheDados('excluir', <?php echo $value->id; ?>)" <?php echo $disable; ?>>Excluir</button>
                 </td>
             </tr>
 
@@ -187,14 +191,14 @@ $atividades = new Atividade();
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Nome da Atividade</label>
-                            <input type="text" name="descricao" id="descricao" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="descricao" id="descricao" class="form-control" aria-describedby="helpId" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Tipo de Atividade</label>
-                            <select class="form-control" name="atividade" id="atividade">
+                            <select class="form-control" name="atividade" id="atividade" required>
                                 <option value="">Selecione</option>
                                 <?php foreach ($atividades->findAll() as $key => $atividade) : ?>
                                     <option value="<?php echo $atividade->id; ?>"><?php echo $atividade->nome; ?></option>
@@ -206,7 +210,7 @@ $atividades = new Atividade();
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Período da Atividade</label>
-                            <input type="date" name="dataInicial" id="dataInicial" class="form-control" aria-describedby="helpId">
+                            <input type="date" name="dataInicial" id="dataInicial" class="form-control" aria-describedby="helpId" required>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -231,12 +235,12 @@ $atividades = new Atividade();
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Carga Horária</label>
-                            <input type="text" name="cargaHoraria" id="cargaHoraria2" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="cargaHoraria" id="cargaHoraria2" class="form-control" aria-describedby="helpId" required>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label>Anexar Arquivo</label>
-                            <input type="file" name="arquivo" id="arquivo" class="form-control-file" aria-describedby="helpId">
+                            <input type="file" name="arquivo" id="arquivo" class="form-control-file" aria-describedby="helpId" required>
                         </div>
                     </div>
 

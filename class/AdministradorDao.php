@@ -6,8 +6,7 @@ abstract class AdministradorDao extends DB
     protected $table;
 
     abstract public function insert();
-    abstract public function update();
-
+    
    public function findAll()
     {
         $sql = "SELECT * FROM $this->table";
@@ -24,6 +23,17 @@ abstract class AdministradorDao extends DB
         $params = array("$matricula");
         $stmt = DB::prepare($sql);
         $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    public function buscaUsuario($id)
+    {
+
+        $sql = "select * from $this->table WHERE id =:id";
+
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam('id', $id);
+        $stmt->execute();
         return $stmt->fetchAll();
     }
 

@@ -99,21 +99,35 @@ class Administrador extends AdministradorDao
         return $stmt->execute();
     }
 
-    public function update()
-    {
-        $sql = "UPDATE $this->table SET matricula = :matricula,
+    public function updateSemSenha()
+  {
+    $sql = "UPDATE $this->table SET matricula = :matricula,
+                                    nome = :nome,
+                                    email = :email
+                                    WHERE id =:id";                                    
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam('matricula', $this->matricula);
+    $stmt->bindParam('nome', $this->nome);
+    $stmt->bindParam('email', $this->email);
+    $stmt->bindParam('id', $this->id);
+    return $stmt->execute();
+  }
+
+  public function updateComSenha()
+  {
+    $sql = "UPDATE $this->table SET matricula = :matricula,
                                     nome = :nome,
                                     email = :email,
                                     senha = :senha
-                                    WHERE id :id";
-        $stmt = DB::prepare($sql);
-        $stmt->bindParam('matricula', $this->matricula);
-        $stmt->bindParam('nome', $this->nome);
-        $stmt->bindParam('email', $this->email);
-        $stmt->bindParam('senha', $this->senha);
-        $stmt->bindParam('id', $this->id);
-        return $stmt->execute();
-    }
+                                    WHERE id =:id";                                    
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam('matricula', $this->matricula);
+    $stmt->bindParam('nome', $this->nome);
+    $stmt->bindParam('email', $this->email);
+    $stmt->bindParam('senha', $this->senha);
+    $stmt->bindParam('id', $this->id);
+    return $stmt->execute();
+  }
 
     public function autenticar()
     {
