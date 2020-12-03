@@ -40,7 +40,7 @@ if (isset($_POST['logar'])) {
             header("location: login.php");
             exit();
         }else if($aluno->verificaStatus($aluno->getEmail(), $aluno->getSenha())){
-            $_SESSION['msgInfo'] = "Usuário já cadastrado. <b>Aguardando Aprovação!</b>";
+            $_SESSION['msgInfo'] = "O Cadastro está aguardando <strong>aprovação do administrador</strong>";
             header("location: login.php");
             exit();
         }  else {
