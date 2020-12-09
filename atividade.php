@@ -87,19 +87,19 @@ $dimensoes = new Dimensao();
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <label>Nome Atividade</label>
-                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId" required>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label>Horas Máximas</label>
-                            <input type="text" name="maxHoras" id="maxHoras" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="maxHoras" id="maxHoras" class="form-control" aria-describedby="helpId" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Dimensão</label>
-                            <select class="form-control" name="dimensao" id="dimensao">
+                            <select class="form-control" name="dimensao" id="dimensao" required>
                                 <option value="">Selecione</option>
                                 <?php foreach ($dimensoes->findAll() as $key => $dimensao) : ?>
                                     <option value="<?php echo $dimensao->id; ?>" <?php echo ($dimensao->id == $value->dimensao_id) ? 'selected' : ''; ?>><?php echo $dimensao->nome; ?></option>
@@ -111,7 +111,7 @@ $dimensoes = new Dimensao();
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Modo de Comprovação</label>
-                            <input type="text" name="modo_comprovacao" id="modo_comprovacao" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="modo_comprovacao" id="modo_comprovacao" class="form-control" aria-describedby="helpId" required>
                         </div>
                     </div>
                 </div>
@@ -139,19 +139,19 @@ $dimensoes = new Dimensao();
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <label>Nome Atividade</label>
-                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId" required>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label>Horas Máximas</label>
-                            <input type="text" name="maxHoras" id="maxHoras" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="maxHoras" id="maxHoras" class="form-control" aria-describedby="helpId" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Dimensão</label>
-                            <select class="form-control" name="dimensao" id="dimensao">
+                            <select class="form-control" name="dimensao" id="dimensao" required>
                                 <option value="">Selecione</option>
                                 <?php foreach ($dimensoes->findAll() as $key => $dimensao) : ?>
                                     <option value="<?php echo $dimensao->id; ?>"><?php echo $dimensao->nome; ?></option>
@@ -163,7 +163,7 @@ $dimensoes = new Dimensao();
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Modo de Comprovação</label>
-                            <input type="text" name="modo_comprovacao" id="modo_comprovacao" class="form-control" aria-describedby="helpId">
+                            <input type="text" name="modo_comprovacao" id="modo_comprovacao" class="form-control" aria-describedby="helpId" required>
                         </div>
                     </div>
                 </div>

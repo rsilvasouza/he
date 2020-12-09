@@ -23,6 +23,7 @@ if ($_SESSION['status'] != 'logado') {
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>FAETERJ - Paracambi</title>
+    <link rel="shortcut icon" href="http://www.faeterj-paracambi.com.br/bind/wp-content/themes/ist/img/favicon.ico" />
 
     <!-- Template -->
     <link href="dist/css/styles.css" rel="stylesheet" />

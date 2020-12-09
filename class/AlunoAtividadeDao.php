@@ -50,7 +50,18 @@ abstract class AlunoAtividadeDao extends DB
   {
     $sql = "SELECT at.nome, a.*
                 FROM $this->table a INNER JOIN atividade at
-                ON a.atividade_id = at.id where a.aluno_id = :id";
+                ON a.atividade_id = at.id where a.aluno_id = :id AND a.status = -1";
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
+  public function findAtividadesAverbadas($id)
+  {
+    $sql = "SELECT at.nome, a.*
+                FROM $this->table a INNER JOIN atividade at
+                ON a.atividade_id = at.id where a.aluno_id = :id AND a.status IN (0,1)";
     $stmt = DB::prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();

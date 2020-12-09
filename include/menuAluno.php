@@ -37,15 +37,14 @@
                     </a>
                     <div class="collapse" id="gerenciar" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="alunoAtividade.php">Cadastro</a>
+                            <a class="nav-link" href="alunoAtividade.php">Cadastradas</a>
+                        </nav>
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="alunoAtividadeAverbada.php">Averbadas</a>
                         </nav>
                     </div>
 
                 </div>
             </div>
-            <!-- <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
-                </div> -->
         </nav>
     </div>

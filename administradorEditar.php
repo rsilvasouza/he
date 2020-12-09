@@ -25,12 +25,12 @@ foreach ($administrador->buscaUsuario($_SESSION['idAdministrador']) as $key => $
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Nome Completo</label>
-                    <input type="text" name="nome" id="nome" value="<?php echo $value->nome; ?>" class="form-control" aria-describedby="helpId">
+                    <input type="text" name="nome" id="nome" value="<?php echo $value->nome; ?>" class="form-control" aria-describedby="helpId" required>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>E-mail</label>
-                    <input type="text" name="email" id="email" value="<?php echo $value->email; ?>" class="form-control" aria-describedby="helpId">
+                    <input type="text" name="email" id="email" value="<?php echo $value->email; ?>" class="form-control" aria-describedby="helpId" required>
                 </div>
             </div>
 

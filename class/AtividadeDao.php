@@ -18,7 +18,7 @@ abstract class AtividadeDao extends DB
 
     public function listarTipoAtividade()
     {
-        $sql = "SELECT a.id, a.nome, a.modo_comprovacao, a.max_horas, d.nome AS dimensao FROM $this->table a INNER JOIN dimensao d WHERE a.dimensao_id = d.id";
+        $sql = "SELECT a.id, a.nome, a.modo_comprovacao, a.max_horas, d.nome AS dimensao, a.dimensao_id FROM $this->table a INNER JOIN dimensao d WHERE a.dimensao_id = d.id";
         $stmt = DB::prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();

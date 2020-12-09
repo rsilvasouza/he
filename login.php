@@ -94,31 +94,31 @@ endif;
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label>matricula</label>
-                                <input type="text" name="matricula" id="matricula" class="form-control" aria-describedby="helpId">
+                                <input type="text" name="matricula" id="matricula" class="form-control" aria-describedby="helpId" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label>Nome Completo</label>
-                                <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId">
+                                <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <label>E-mail</label>
-                                <input type="text" name="email" id="email" class="form-control" aria-describedby="helpId">
+                                <input type="text" name="email" id="email" class="form-control" aria-describedby="helpId" required>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label>Senha</label>
-                                <input type="password" name="senha" id="senha" class="form-control" aria-describedby="helpId">
+                                <input type="password" name="senha" id="senha" class="form-control" aria-describedby="helpId" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <label>Curso</label>
-                                <select class="form-control" name="curso" id="curso">
+                                <select class="form-control" name="curso" id="curso" required>
                                     <option value="">Selecione</option>
                                     <?php foreach ($curso->findAll() as $key => $value) : ?>
                                         <option value="<?php echo $value->id; ?>"><?php echo $value->sigla . ' - ' . $value->nome; ?></option>
@@ -128,7 +128,7 @@ endif;
 
                             <div class="form-group col-md-4">
                                 <label>Turno</label>
-                                <select class="form-control" name="turno" id="turno">
+                                <select class="form-control" name="turno" id="turno" required>
                                     <option value="">Selecione</option>
                                     <option value="1">Manhã</option>
                                     <option value="2">Noite</option>
