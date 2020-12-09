@@ -82,12 +82,12 @@ $dimensao = new Dimensao();
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label>Nome</label>
-                                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId">
+                                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId" required>
                                         </div>
 
                                         <div class="form-group col-md-4">
                                             <label> Horas Máximas</label>
-                                            <input type="text" name="max_horas" id="max_horas" class="form-control" aria-describedby="helpId">
+                                            <input type="text" name="max_horas" id="max_horas" class="form-control" aria-describedby="helpId" required>
                                         </div>
                                     </div>
                                 </div>
@@ -115,12 +115,12 @@ $dimensao = new Dimensao();
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label>Nome</label>
-                                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId">
+                                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId" required>
                                         </div>
 
                                         <div class="form-group col-md-4">
                                             <label>Horas Máximas</label>
-                                            <input type="text" name="max_horas" id="max_horas" class="form-control" aria-describedby="helpId">
+                                            <input type="text" name="max_horas" id="max_horas" class="form-control" aria-describedby="helpId" required>
                                         </div>
                                     </div>
                                 </div>

@@ -68,13 +68,43 @@ abstract class AlunoAtividadeDao extends DB
     return $stmt->fetchAll();
   }
 
-  public function ListarChart()
+  public function chartDimensaoGeral()
   {
     $sql = "SELECT d.nome AS nome, COUNT(d.nome) AS quantidade 
         FROM atividade a 
         INNER JOIN dimensao d ON a.dimensao_id = d.id 
         INNER JOIN $this->table alt ON alt.atividade_id = a.id WHERE alt.status = 1 GROUP BY d.nome
         HAVING COUNT(d.nome) > 0 ORDER BY d.id";
+    $stmt = DB::prepare($sql);
+    $stmt->execute();
+    return $array = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function chartDimensaoSI()
+  {
+    $sql = "SELECT d.nome AS nome, COUNT(d.nome) AS quantidade 
+    FROM atividade a  
+    INNER JOIN dimensao d ON a.dimensao_id = d.id 
+    INNER JOIN $this->table alt ON alt.atividade_id = a.id 
+    INNER JOIN aluno a2 ON a2.id = alt.aluno_id 
+    INNER JOIN curso c ON c.id = a2.curso_id 
+    WHERE alt.status = 1 AND c.id = 1 GROUP BY d.nome
+    HAVING COUNT(d.nome) > 0 ORDER BY d.id";
+    $stmt = DB::prepare($sql);
+    $stmt->execute();
+    return $array = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function chartDimensaoGA()
+  {
+    $sql = "SELECT d.nome AS nome, COUNT(d.nome) AS quantidade 
+    FROM atividade a  
+    INNER JOIN dimensao d ON a.dimensao_id = d.id 
+    INNER JOIN $this->table alt ON alt.atividade_id = a.id 
+    INNER JOIN aluno a2 ON a2.id = alt.aluno_id 
+    INNER JOIN curso c ON c.id = a2.curso_id 
+    WHERE alt.status = 1 AND c.id = 2 GROUP BY d.nome
+    HAVING COUNT(d.nome) > 0 ORDER BY d.id";
     $stmt = DB::prepare($sql);
     $stmt->execute();
     return $array = $stmt->fetchAll(PDO::FETCH_ASSOC);

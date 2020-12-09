@@ -80,12 +80,12 @@ $curso = new Curso();
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label>Sigla</label>
-                                            <input type="text" name="sigla" id="sigla" class="form-control" aria-describedby="helpId">
+                                            <input type="text" name="sigla" id="sigla" class="form-control" aria-describedby="helpId" required>
                                         </div>
 
                                         <div class="form-group col-md-8">
                                             <label>Nome do Curso</label>
-                                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId">
+                                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId" required>
                                         </div>
                                     </div>
                                 </div>
@@ -113,12 +113,12 @@ $curso = new Curso();
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label>Sigla</label>
-                                            <input type="text" name="sigla" id="sigla" class="form-control" aria-describedby="helpId">
+                                            <input type="text" name="sigla" id="sigla" class="form-control" aria-describedby="helpId" required>
                                         </div>
 
                                         <div class="form-group col-md-8">
                                             <label>Nome do Curso</label>
-                                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId">
+                                            <input type="text" name="nome" id="nome" class="form-control" aria-describedby="helpId" required>
                                         </div>
                                     </div>
                                 </div>

@@ -46,7 +46,7 @@ class Dimensao extends DimensaoDao
 
   public function setMax_horas($max_horas)
   {
-    $this->max_horas = $max_horas;
+    $this->max_horas = ($max_horas == '') ? '0' : $max_horas;
   }
 
   public function getData_registro()
