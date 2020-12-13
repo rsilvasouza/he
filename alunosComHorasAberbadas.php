@@ -19,6 +19,7 @@ $aluno = new Aluno();
                 <th>Aluno</th>
                 <th>Curso</th>
                 <th>Horas</th>
+                <th></th>
             </tr>
         </thead>
         <?php foreach ($aluno->listarAlunosComHorasAverbadas() as $key => $value) :
@@ -29,12 +30,9 @@ $aluno = new Aluno();
                 <td><?php echo $value->aluno; ?></td>
                 <td><?php echo $value->curso . " - " . $aluno->turno($value->turno); ?></td>
                 <td><?php echo substr($value->horas,0,5) . ' / 100h'; ?></td>
+                <td><?php echo "<a class='btn btn-info' target='_blank' href='relatorioFinal.php?aluno={$value->matricula}'><i class='fas fa-file-signature'></i></a>"?></td>
 
             </tr>
-
-
-
-
         <?php endforeach; ?>
     </table>
 </div>

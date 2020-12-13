@@ -37,6 +37,19 @@ abstract class AlunoDao extends DB
         return $stmt->fetchAll();
     }
 
+    public function buscarAluno($matricula)
+    {
+
+        $sql = "select a.id, a.nome, a.matricula, a.turno, c.nome AS curso from $this->table a
+                INNER JOIN curso c ON  c.id = a.curso_id
+                WHERE matricula =:matricula";
+
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam('matricula', $matricula);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function buscaAluno($id)
     {
 

@@ -1,3 +1,20 @@
+<?php
+require_once 'classes.php';
+
+$matricula = $_GET['aluno'];
+
+$aluno = new Aluno();
+
+$alunos = $aluno->buscarAluno($matricula);
+foreach ($alunos as $key => $value) :
+endforeach;
+
+$atividade = new AlunoAtividade();
+
+$somaNota = $atividade->horasAprovadas($value->id);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -25,38 +42,85 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-center">Curso: <?php echo "SI / GA"; ?></h5>
+                <h5 class="card-title text-center">Curso: <?php echo $value->curso; ?></h5>
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
-                        <strong>Aluno:</strong> <?php echo "Nome Completo do Aluno"; ?>
+                        <strong>Aluno:</strong> <?php echo $value->nome; ?>
                     </div>
 
                     <div class="col-md-4">
-                        <strong>Matrícula:</strong> <?php echo "12345678945"; ?>
+                        <strong>Matrícula:</strong> <?php echo $value->matricula; ?>
                     </div>
                     <div class="col-md-2">
-                        <strong>Turno:</strong> <?php echo "Manhã / Noite"; ?>
+                        <strong>Turno:</strong> <?php echo $aluno->turno($value->turno); ?>
                     </div>
                 </div>
+
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Atividade</th>
+                            <th>Horas averbadas</th>
+                            <th>Dimensão</th>
+                        </tr>
+                    </thead>
+
+                    <div class="card-body">
+                        <?php $atividades = $atividade->buscarAtividadesAprovadas($value->id);
+                        foreach ($atividades as $key => $atv) :
+
+                        ?>
+                            <tr>
+                                <td><?php echo $atv->nome; ?></td>
+                                <td class="text-center"><?php echo substr($atv->horas,0,5); ?></td>
+                                <td class="text-center"><?php echo $atv->dimensao; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </div>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <p><strong>Carga Horária Total Necessária:</strong> 100 Horas</p>
+                <p><strong>Carga Horária Total Averbada:</strong> <?php echo $somaNota[0]->total; ?> Horas</p>
+            </div>
+        </div>
+        <br>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                Docente Responsável: _______________________________________________
+            </div>
+
+            <div class="form-group col-md-4">
+                Data: ____/____/________
             </div>
         </div>
 
-        <div class="card">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Atividade</th>
-                        <th>Máximo </th>
-                        <th></th>
-                    </tr>
-                </thead>
-            </table>
-            <div class="card-body">
-            </div>
-        </div>
 
     </div>
+
+
+
+
+
+
+
+
 </body>
 
 </html>

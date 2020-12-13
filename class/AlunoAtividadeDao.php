@@ -38,6 +38,20 @@ abstract class AlunoAtividadeDao extends DB
     return $stmt->fetchAll();
   }
 
+  public function buscarAtividadesAprovadas($id)
+  {
+    $sql = "SELECT at.nome, a.carga_horaria AS horas, d.nome AS dimensao
+            FROM $this->table a
+            INNER JOIN aluno al ON al.id = a.aluno_id
+            INNER JOIN atividade at ON a.atividade_id = at.id
+            INNER JOIN dimensao d ON d.id = at.dimensao_id
+            WHERE al.id = :id AND a.status = 1";
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
   public function atividadesEmAnalise()
   {
     $sql = "SELECT COUNT(*) AS total FROM $this->table WHERE status = -1";
