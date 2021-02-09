@@ -264,6 +264,10 @@ class AlunoAtividade extends AlunoAtividadeDao
     return $stmt->execute();
   }
 
+  public function compararCargaMaxPorAtividade($a,$b,$c){
+    
+  }
+
   public function situacao($status)
   {
 

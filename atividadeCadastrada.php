@@ -28,6 +28,7 @@ $atividade = new Atividade();
         </thead>
         <?php foreach ($alunoAtividade->listarAtividadeCadastrada() as $key => $value) : 
             $periodo = ($value->data_inicial == $value->data_final) ? date("d/m/Y", strtotime($value->data_inicial)) : date("d/m/Y", strtotime($value->data_inicial)) . " - " . date("d/m/Y", strtotime($value->data_final));
+            $disable = 'disable';
             if(empty($value->arquivo)){
                 $arquivo =  "<button class='btn btn-secondary' {$disable}>
                                 <i class='fas fa-exclamation-triangle'></i>
@@ -44,12 +45,12 @@ $atividade = new Atividade();
                 <td><?php echo $value->descricao; ?></td>
                 <td><?php echo $value->nome; ?></td>
                 <td class="text-center"><?php echo $periodo; ?> </td>
-                <td class="text-center"><?php echo $value->carga_horaria; ?></td>
+                <td class="text-center"><?php echo substr($value->carga_horaria, 0,5); ?></td>
                 <td class="text-center">
                     <?php echo $arquivo; ?>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aprovar" onclick="preencheDados('aprovar', <?php echo '\'' . $value->id . '\''?>)">Aprovar</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aprovar" onclick="preencheDados('aprovar', <?php echo '\'' . $value->id . '\','.'\''. $value->aluno_id.'\',' . '\'' . $value->atividade_id . '\',' . '\'' . substr($value->carga_horaria, 0, 5) . '\'' ?>)">Aprovar</button>
                 </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rejeitar" onclick="preencheDados('rejeitar', <?php echo $value->id; ?>)">Rejeitar</button>
@@ -74,6 +75,9 @@ $atividade = new Atividade();
             </div>
             <form method="post" action="alunoAtividadeController.php">
                 <input type="hidden" name="idAprovar" id="idAprovar">
+                <input type="hidden" name="idAluno" id="idAluno">
+                <input type="hidden" name="idAtividade" id="idAtividade">
+                <input type="hidden" name="cargaHoraria" id="cargaHoraria">
 
                 <div class="modal-footer">
                     <button type='submit' name="aprovar" class='btn btn-success'>Aprovar</button>
@@ -124,12 +128,15 @@ $atividade = new Atividade();
         });
     });
 
-    function preencheDados(tipo, id) {
+    function preencheDados(tipo, id, aluno, atividade, cargaHoraria) {
         if (tipo == 'rejeitar') {
             $('#idRejeitar').val(id);
             
         } else if (tipo == 'aprovar') {
             $('#idAprovar').val(id);
+            $('#idAluno').val(aluno);
+            $('#idAtividade').val(atividade);
+            $('#cargaHoraria').val(cargaHoraria);
         }
     }
 </script>

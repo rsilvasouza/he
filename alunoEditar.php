@@ -22,7 +22,7 @@ foreach ($aluno->buscaAluno($_SESSION['idAluno']) as $key => $value) :
                 <input type="hidden" name="id" value="<?php echo $_SESSION['idAluno']; ?>">
                 <div class="form-group col-md-4">
                     <label>matricula</label>
-                    <input type="text" name="matricula" id="matricula" value="<?php echo $value->matricula; ?>" class="form-control" aria-describedby="helpId" required>
+                    <input type="text" name="matricula" id="matricula" value="<?php echo $value->matricula; ?>" class="form-control" aria-describedby="helpId" disabled>
                 </div>
             </div>
             <div class="form-row">
@@ -40,7 +40,7 @@ foreach ($aluno->buscaAluno($_SESSION['idAluno']) as $key => $value) :
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Curso</label>
-                    <select class="form-control" name="curso" id="curso" required>
+                    <select class="form-control" name="curso" id="curso" disabled>
                         <option value="">Selecione</option>
                         <?php foreach ($cursos->findAll() as $key => $curso) : ?>
                             <option value="<?php echo $curso->id; ?>" <?php echo ($curso->id == $value->curso_id) ? 'selected' : ''; ?>>

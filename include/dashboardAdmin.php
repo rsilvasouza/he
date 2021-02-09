@@ -6,7 +6,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="mr-6">
-                        <div class="card-title">Atividades para Aprovar</div>
+                        <div class="card-title">Atividades para Analisar</div>
                         <h1 class="text-lg font-weight-bold"><?php echo $atividadesCadastradasEmAnalise; ?></h1>
                     </div>
 
@@ -45,7 +45,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="mr-6">
-                        <div class="card-title">Alunos para Aprovar</div>
+                        <div class="card-title">Alunos pré-cadastrados</div>
                         <h1 class="text-lg font-weight-bold"><?php echo $contas; ?></h1>
                     </div>
 
@@ -144,7 +144,7 @@ $AlunoAtividade = new AlunoAtividade();
         <div class="card">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 text-center">
-                <h6 class="m-0 font-weight-bold text-primary">Percentual de Dimensões Utilizadas</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Percentual de Dimensões</h6>
             </div>
 
             <script type="text/javascript">

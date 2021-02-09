@@ -8,8 +8,8 @@ class Erro {
             var_dump($erro);
             echo '</pre';
         } else {
-            echo $erro->getMessage();
-            //header("Location: index.php");
+            //echo $erro->getMessage();
+            header("Location: index.php");
         }
         exit;
     }

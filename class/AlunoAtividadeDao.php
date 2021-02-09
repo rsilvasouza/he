@@ -38,6 +38,18 @@ abstract class AlunoAtividadeDao extends DB
     return $stmt->fetchAll();
   }
 
+  public function horasAprovadasPorAtividade($idAluno, $idAtividade)
+  {
+    $sql = "SELECT time_format( SEC_TO_TIME( SUM( TIME_TO_SEC( a.carga_horaria ) ) ),'%H:%i') AS total FROM $this->table a
+            INNER JOIN atividade at ON a.atividade_id = at.id
+            where a.aluno_id = :idAluno AND a.atividade_id = :idAtividade AND a.status = 1";
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam(':idAluno', $idAluno, PDO::PARAM_INT);
+    $stmt->bindParam(':idAtividade', $idAtividade, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
   public function buscarAtividadesAprovadas($id)
   {
     $sql = "SELECT at.nome, a.carga_horaria AS horas, d.nome AS dimensao

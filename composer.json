@@ -9,6 +9,7 @@
     "require": {
         "components/jquery": "^3.5",
         "twbs/bootstrap": "4.5.0",
-        "datatables/datatables": "^1"
+        "datatables/datatables": "^1",
+        "phpmailer/phpmailer": "^6.2"
     }
 }

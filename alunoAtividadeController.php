@@ -3,6 +3,12 @@
     require_once 'classes.php';
 
     $alunoAtividade = new AlunoAtividade();
+    $atividade = new Atividade();
+
+    function somaCargaHoraria($somaCargaHoraria, $maxHorasPorAtividade){
+        
+
+    }
 
     if (isset($_POST['cadastrar'])) {
 
@@ -46,8 +52,23 @@
 
         try {
             $id = $_POST['idAprovar'];
+            $idAluno = $_POST['idAluno'];
+            $idAtividade = $_POST['idAtividade'];
+            $cargaHoraria = $_POST['cargaHoraria'];
             $status = 1;
 
+            $resultCargaHorariaAprovada = ($alunoAtividade->horasAprovadasPorAtividade($idAluno, $idAtividade));
+            $cargaHorariaAprovada = ($resultCargaHorariaAprovada[0]->total == '') ? '00:00' : $resultCargaHorariaAprovada[0]->total;
+            $somaCargaHoraria = $cargaHoraria + $cargaHorariaAprovada;
+
+            $maxHorasPorAtividade = $atividade->listarAtividade($idAtividade);
+
+            if(somaCargaHoraria($somaCargaHoraria, $maxHorasPorAtividade)){
+
+            }
+
+
+            
             if ($alunoAtividade->aprovar($id, $status)) :
                 $_SESSION['msgSucesso'] = "Atividade aprovada com sucesso!";
                 header("location: atividadeCadastrada.php");

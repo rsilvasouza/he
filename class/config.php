@@ -1,5 +1,5 @@
 <?php
-define('DEBUG', TRUE);
+define('DEBUG', FALSE);
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'she');
 define('DB_USER', 'root');
