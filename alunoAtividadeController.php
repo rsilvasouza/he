@@ -5,9 +5,8 @@
     $alunoAtividade = new AlunoAtividade();
     $atividade = new Atividade();
 
-    function somaCargaHoraria($somaCargaHoraria, $maxHorasPorAtividade){
-        
-
+    function somaCargaHoraria($somaCargaHoraria, $maxHorasPorAtividade)
+    {
     }
 
     if (isset($_POST['cadastrar'])) {
@@ -57,27 +56,60 @@
             $cargaHoraria = $_POST['cargaHoraria'];
             $status = 1;
 
-            $resultCargaHorariaAprovada = ($alunoAtividade->horasAprovadasPorAtividade($idAluno, $idAtividade));
-            $cargaHorariaAprovada = ($resultCargaHorariaAprovada[0]->total == '') ? '00:00' : $resultCargaHorariaAprovada[0]->total;
-            $somaCargaHoraria = $cargaHoraria + $cargaHorariaAprovada;
+            //Busca Carga Horária
+            $cargaHorariaAtividade = $atividade->listarAtividade($idAtividade);
+            $cargaHorariaAtividadeMinutos = horaParaMinutos($cargaHorariaAtividade . ":00");
 
-            $maxHorasPorAtividade = $atividade->listarAtividade($idAtividade);
+            //Busca Horas Aprovadas
+            $horasTotaisAprovadas = $alunoAtividade->somarCargaHorariaPorTipo($idAtividade, $idAluno);
+            $horasTotaisAprovadasMinutos = horaParaMinutos($horasTotaisAprovadas);
 
-            if(somaCargaHoraria($somaCargaHoraria, $maxHorasPorAtividade)){
+            $soma = $horasTotaisAprovadasMinutos + horaParaMinutos($cargaHoraria);
 
+
+            if ($horasTotaisAprovadasMinutos >= $cargaHorariaAtividadeMinutos) {
+
+                $motivo = "A atividade informada já chegou ao limite máximo de horas necessárias";
+                $status = 0;
+
+                if ($alunoAtividade->rejeitar($id, $motivo, $status)) :
+                    $_SESSION['msgSucesso'] = "Atividade aprovada com sucesso!";
+                    header("location: atividadeCadastrada.php");
+                    exit();
+                else :
+                    $_SESSION['msgErro'] = "Ocorreu um erro durante a aprovação do registo, por favor tente novamente";
+                    header("location: atividadeCadastrada.php");
+                    exit();
+                endif;
+            } else if ($soma > $cargaHorariaAtividadeMinutos) {
+
+
+                $subtrai = $soma - $cargaHorariaAtividadeMinutos;
+                $cargaHorariaAtualizada = horaParaMinutos($cargaHoraria) - $subtrai;
+                $sobra = minutosParaHoras($cargaHorariaAtualizada);
+
+                //APROVA ATIVIDADE COM CARGA HORARIA ATUALIZADA
+                if ($alunoAtividade->aprovarComCargaHoraria($id, $status, $sobra)) :
+                    $_SESSION['msgSucesso'] = "Atividade aprovada com sucesso!";
+                    header("location: atividadeCadastrada.php");
+                    exit();
+                else :
+                    $_SESSION['msgErro'] = "Ocorreu um erro durante a aprovação do registo, por favor tente novamente";
+                    header("location: atividadeCadastrada.php");
+                    exit();
+                endif;
+            } else {
+                //APROVA ATIVIDADE
+                if ($alunoAtividade->aprovar($id, $status)) :
+                    $_SESSION['msgSucesso'] = "Atividade aprovada com sucesso!";
+                    header("location: atividadeCadastrada.php");
+                    exit();
+                else :
+                    $_SESSION['msgErro'] = "Ocorreu um erro durante a aprovação do registo, por favor tente novamente";
+                    header("location: atividadeCadastrada.php");
+                    exit();
+                endif;
             }
-
-
-            
-            if ($alunoAtividade->aprovar($id, $status)) :
-                $_SESSION['msgSucesso'] = "Atividade aprovada com sucesso!";
-                header("location: atividadeCadastrada.php");
-                exit();
-            else :
-                $_SESSION['msgErro'] = "Ocorreu um erro durante a aprovação do registo, por favor tente novamente";
-                header("location: atividadeCadastrada.php");
-                exit();
-            endif;
         } catch (Exception $ex) {
             Erro::trataErro($ex);
         }
@@ -221,4 +253,24 @@
             header("location: alunoAtividade.php");
             exit();
         }
+    }
+
+    function horaParaMinutos($hora)
+    {
+        $partes = explode(":", $hora);
+        $minutos = $partes[0] * 60 + $partes[1];
+
+        return ($minutos);
+    }
+
+    function minutosParaHoras($minutos)
+    {
+
+        $horas = floor($minutos / 60);
+        $minutos = $minutos % 60;
+        $minutos = ($minutos === 0) ? "00" : $minutos;
+
+        $hora = $horas . ":" . $minutos;
+
+        return $hora;
     }

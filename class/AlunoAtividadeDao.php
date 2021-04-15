@@ -157,6 +157,18 @@ abstract class AlunoAtividadeDao extends DB
     return $stmt->execute();
   }
 
+  public function aprovarComCargaHoraria($id, $status, $cargaHoraria)
+  {
+    $sql = "UPDATE $this->table SET status = :status,
+                                    carga_horaria = :cargaHoraria
+                                    WHERE id =:id";
+    $stmt = DB::prepare($sql);
+    $stmt->bindParam('status', $status);
+    $stmt->bindParam('cargaHoraria', $cargaHoraria);
+    $stmt->bindParam('id', $id, PDO::PARAM_INT);
+    return $stmt->execute();
+  }
+
   public function rejeitar($id, $motivo, $status)
   {
     $sql = "UPDATE $this->table SET motivo = :motivo,

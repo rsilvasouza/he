@@ -50,7 +50,7 @@ $atividade = new Atividade();
                     <?php echo $arquivo; ?>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aprovar" onclick="preencheDados('aprovar', <?php echo '\'' . $value->id . '\','.'\''. $value->aluno_id.'\',' . '\'' . $value->atividade_id . '\',' . '\'' . substr($value->carga_horaria, 0, 5) . '\'' ?>)">Aprovar</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#aprovar" onclick="preencheDados('aprovar', <?php echo '\'' . $value->id . '\','.'\''. $value->aluno_id.'\',' . '\'' . $value->atividade_id . '\',' . '\'' . $value->carga_horaria . '\'' ?>)">Aprovar</button>
                 </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rejeitar" onclick="preencheDados('rejeitar', <?php echo $value->id; ?>)">Rejeitar</button>
