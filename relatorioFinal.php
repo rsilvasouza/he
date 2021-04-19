@@ -63,21 +63,93 @@ $somaNota = $atividade->horasAprovadas($value->id);
                         <tr class="text-center">
                             <th>Atividade</th>
                             <th>Horas averbadas</th>
-                            <th>Dimensão</th>
                         </tr>
                     </thead>
 
                     <div class="card-body">
-                        <?php $atividades = $atividade->buscarAtividadesAprovadas($value->id);
-                        foreach ($atividades as $key => $atv) :
+                        <?php $atividades = $atividade->buscarAtividadesAprovadasEnsino($value->id);
+
+                        if (!empty($atividades)) {
+                            echo "<thead>
+                                    <tr class='text-left'>
+                                        <th>Dimensão: Ensino</th>
+                                        <th></th>
+                                    </tr>
+                                  </thead>";
+
+                            foreach ($atividades as $key => $atv) :
 
                         ?>
-                            <tr>
-                                <td><?php echo $atv->nome; ?></td>
-                                <td class="text-center"><?php echo substr($atv->horas,0,5); ?></td>
-                                <td class="text-center"><?php echo $atv->dimensao; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
+                                <tr>
+                                    <td><?php echo $atv->nome; ?></td>
+                                    <td class="text-center"><?php echo substr($atv->horas, 0, 5); ?></td>
+                                </tr>
+                        <?php
+                            endforeach;
+                        } ?>
+                    
+                        <?php $atividades = $atividade->buscarAtividadesAprovadasPesquisa($value->id);
+
+                        if (!empty($atividades)) {
+                            echo "<thead>
+                                    <tr class='text-left'>
+                                        <th>Dimensão: Pesquisa</th>
+                                        <th></th>
+                                    </tr>
+                                  </thead>";
+
+                            foreach ($atividades as $key => $atv) :
+
+                        ?>
+                                <tr>
+                                    <td><?php echo $atv->nome; ?></td>
+                                    <td class="text-center"><?php echo substr($atv->horas, 0, 5); ?></td>
+                                </tr>
+                        <?php
+                            endforeach;
+                        } ?>
+                  
+                        <?php $atividades = $atividade->buscarAtividadesAprovadasExtensao($value->id);
+
+                        if (!empty($atividades)) {
+                            echo "<thead>
+                                    <tr class='text-left'>
+                                        <th>Dimensão: Extensão</th>
+                                        <th></th>
+                                    </tr>
+                                  </thead>";
+
+                            foreach ($atividades as $key => $atv) :
+
+                        ?>
+                                <tr>
+                                    <td><?php echo $atv->nome; ?></td>
+                                    <td class="text-center"><?php echo substr($atv->horas, 0, 5); ?></td>
+                                </tr>
+                        <?php
+                            endforeach;
+                        } ?>
+                   
+                        <?php $atividades = $atividade->buscarAtividadesAprovadasAtividadesExtras($value->id);
+
+                        if (!empty($atividades)) {
+                            echo "<thead>
+                                    <tr class='text-left'>
+                                        <th>Dimensão: Atividades Extras</th>
+                                        <th></th>
+                                    </tr>
+                                  </thead>";
+
+                            foreach ($atividades as $key => $atv) :
+
+                        ?>
+                                <tr>
+                                    <td><?php echo $atv->nome; ?></td>
+                                    <td class="text-center"><?php echo substr($atv->horas, 0, 5); ?></td>
+                                </tr>
+                        <?php
+                            endforeach;
+                        } ?>
                     </div>
                 </table>
             </div>
