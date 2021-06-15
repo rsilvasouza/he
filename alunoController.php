@@ -3,7 +3,7 @@ session_start();
 require_once 'classes.php';
 
 $aluno = new Aluno();
-
+$email = new Email();
 
 if (isset($_POST['cadastrar'])) {
 
@@ -33,6 +33,7 @@ if (isset($_POST['cadastrar'])) {
     try {
 
         if ($aluno->atualizaStatus($_POST['idAprovar'], 1)) {
+            $email->aprovarCadastro('liberacao',$_POST['email']);
             $_SESSION['msgSucesso'] = "Aluno Aprovado com Sucesso!";
             header("location: alunoCadastrado.php");
             exit();

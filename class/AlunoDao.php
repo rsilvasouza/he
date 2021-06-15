@@ -109,7 +109,9 @@ abstract class AlunoDao extends DB
         $stmt = DB::prepare($sql);
         $stmt->bindParam('status', $status);
         $stmt->bindParam('id', $id);
-        return $stmt->execute();
+        $stmt->execute();
+        $result = ($stmt->rowCount() > 0) ? true : false;
+        return $result;
     }
 
     public function horasCadastradas($id)
