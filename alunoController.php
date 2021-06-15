@@ -17,10 +17,17 @@ if (isset($_POST['cadastrar'])) {
         # Insert
 
         if (!$aluno->findMatricula($_POST['matricula']) && !$aluno->findEmail($_POST['email'])) :
-            $aluno->insert();
-            $_SESSION['msgSucesso'] = "Registro cadastrado com sucesso. <strong>Aguarde aprovação!</strong>";
-            header("location: login.php");
-            exit();
+
+            if ($aluno->insert()) {
+                $email->sendEmail("cadastro", $aluno->getEmail());
+                $_SESSION['msgSucesso'] = "Registro cadastrado com sucesso. <strong>Aguarde aprovação!</strong>";
+                header("location: login.php");
+                exit();
+            } else {
+                $_SESSION['msgErro'] = "Erro ao Cadastrar!";
+                header("location: login.php");
+                exit();
+            }
         else :
             $_SESSION['msgErro'] = "Aluno já cadastrado no sistema!";
             header("location: login.php");
@@ -33,7 +40,7 @@ if (isset($_POST['cadastrar'])) {
     try {
 
         if ($aluno->atualizaStatus($_POST['idAprovar'], 1)) {
-            $email->aprovarCadastro('liberacao',$_POST['email']);
+            $email->aprovarCadastro('liberacao', $_POST['email']);
             $_SESSION['msgSucesso'] = "Aluno Aprovado com Sucesso!";
             header("location: alunoCadastrado.php");
             exit();

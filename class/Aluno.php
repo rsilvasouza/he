@@ -157,8 +157,10 @@ class Aluno extends AlunoDao
     $stmt->bindParam('senha', $this->senha);
     $stmt->bindParam('turno', $this->turno);
     $stmt->bindParam('cursoId', $this->curso);
+    $stmt->execute();
     
-    return $stmt->execute();
+    $result = ($stmt->rowCount() > 0) ? true : false;
+    return $result;
   }
 
   public function update()

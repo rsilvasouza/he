@@ -12,7 +12,7 @@ require_once "config.php";
 
 class Email
 {
-    public function sendEmail($tipo, $email, $cpf, $senha)
+    public function sendEmail($tipo, $email)
     {
         $mail = new PHPMailer(true);
         try {
@@ -38,7 +38,7 @@ class Email
                 case 'cadastro':
                     $mail->Subject = "Nova conta criada";
                     $mail->AltBody = "";
-                    $corpo = $this->novaConta($cpf, $senha);
+                    $corpo = $this->novaConta();
                     break;
                 
                 default:
@@ -104,7 +104,7 @@ class Email
         }
     }
 
-    public function novaConta($cpf, $senha){
+    public function novaConta(){
         
         $texto = "<div class=''>
         <div id=':14w' class='ii gt'>
@@ -130,10 +130,8 @@ class Email
                                                 
                                                     <div style='padding:24px 16px'>
                                                         <div><span style='font-size:11pt'>
-                                                            Você está recebendo o e-mail de confirmação de acesso ao Sistema de SHE.<br><br>
-                                                            Segue abaixo as informações de acesso:<br><br>
-                                                            CPF: {$cpf}<br>
-                                                            Senha: {$senha}<br><br>
+                                                            A sua conta no sistema de horas extracurriculares foi criada.<br>
+                                                            Após a analise feita pelo professor responsável a sua conta será desbloqueada para acesso.<br><br>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -192,7 +190,7 @@ class Email
                                             <td>
                                                 <div style='text-align: left;'>
                                                     <div style='border-bottom:1px solid rgb(246,247,248);padding:24px 16px'>
-                                                        <strong>Bem vindo ao Sistema de SHE</strong>
+                                                        <strong>Análise Concluída!</strong>
                                                     </div>
                                                 
                                                     <div style='padding:24px 16px'>
